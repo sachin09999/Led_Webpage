@@ -1,9 +1,12 @@
 services:
   web:
-    image: node:20-alpine
+    build: .
+    image: waffi-led-wall
+    restart: always
     working_dir: /app
     volumes:
       - ./:/app
+      - /app/node_modules # Prevents local node_modules from overwriting container's
       - ./data:/app/data
     ports:
       - "8080:3000"
