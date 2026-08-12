@@ -9,12 +9,12 @@ export default function AdminClient({ initialFiles }) {
     
     // For the form
     const [formData, setFormData] = useState({
-        name: '', url: '', category: 'LED Wall Docs', size: '', type: 'document'
+        name: '', url: '', category: 'LED Wall Docs', type: 'document'
     });
 
     const resetForm = () => {
         setEditingId(null);
-        setFormData({ name: '', url: '', category: 'LED Wall Docs', size: '', type: 'document' });
+        setFormData({ name: '', url: '', category: 'LED Wall Docs', type: 'document' });
     };
 
     const handleEdit = (file) => {
@@ -23,7 +23,6 @@ export default function AdminClient({ initialFiles }) {
             name: file.name,
             url: file.url,
             category: file.category,
-            size: file.size,
             type: file.type
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -76,10 +75,6 @@ export default function AdminClient({ initialFiles }) {
                         <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             <label className="text-gray">File URL / Link</label>
                             <input required type="text" value={formData.url} onChange={e => setFormData({...formData, url: e.target.value})} style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none' }} />
-                        </div>
-                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <label className="text-gray">Size (e.g. 2.4 MB)</label>
-                            <input type="text" value={formData.size} onChange={e => setFormData({...formData, size: e.target.value})} style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-color)', color: 'var(--text-main)', outline: 'none' }} />
                         </div>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             <label className="text-gray">Type</label>

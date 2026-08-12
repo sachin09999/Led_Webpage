@@ -9,7 +9,8 @@ const dataFilePath = path.join(process.cwd(), 'data', 'store.json');
 export async function getFiles() {
     try {
         const fileContents = await fs.readFile(dataFilePath, 'utf8');
-        return JSON.parse(fileContents);
+        const files = JSON.parse(fileContents);
+        return files.sort((a, b) => a.name.localeCompare(b.name));
     } catch (error) {
         console.log("Database not found, initializing fresh store...");
         const defaultData = [
@@ -26,7 +27,7 @@ export async function getFiles() {
         } catch (e) {
             console.error("Failed to initialize store.json", e);
         }
-        return defaultData;
+        return defaultData.sort((a, b) => a.name.localeCompare(b.name));
     }
 }
 
@@ -53,7 +54,7 @@ export async function addFile(formData) {
         name: formData.get('name'),
         category: category,
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
-        size: formData.get('size') || '0 MB',
+        size: formData.get('size') || '-',
         type: formData.get('type') || 'document',
         url: formData.get('url'),
         icon,

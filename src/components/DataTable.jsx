@@ -23,7 +23,6 @@ export default function DataTable({ files, onFileClick, onEdit, onDelete }) {
                         <th>Name</th>
                         <th>Category</th>
                         <th>Date Added</th>
-                        <th>Size</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -36,7 +35,6 @@ export default function DataTable({ files, onFileClick, onEdit, onDelete }) {
                                 <td className="font-medium">{file.name}</td>
                                 <td><span className={`tag ${file.tagColor}`}>{file.category}</span></td>
                                 <td className="text-gray">{file.date}</td>
-                                <td className="text-gray">{file.size}</td>
                                 <td>
                                     {(onEdit || onDelete) ? (
                                         <div style={{ display: 'flex', gap: '8px' }} onClick={e => e.stopPropagation()}>
