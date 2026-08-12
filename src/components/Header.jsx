@@ -17,8 +17,8 @@ export default function Header({ toggleSidebar, isDark, toggleDark }) {
             {pathname !== '/' && (
                 <button 
                     className="icon-btn" 
-                    onClick={() => router.back()} 
-                    title="Go Back"
+                    onClick={() => router.push('/')} 
+                    title="Back to Dashboard"
                 >
                     <ArrowLeft size={22} />
                 </button>

@@ -10,4 +10,4 @@ services:
       - ./data:/app/data
     ports:
       - "8080:3000"
-    command: npm run dev
+    command: sh -c "npm run build && npm run start"
