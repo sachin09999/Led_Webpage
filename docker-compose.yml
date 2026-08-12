@@ -1,0 +1,10 @@
+services:
+  web:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - ./data:/app/data
+    ports:
+      - "8080:3000"
+    command: npm run dev

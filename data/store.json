@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1786516930002",
+    "name": "Connection Diagram Dubai Wali Project ",
+    "category": "Drawings",
+    "date": "Aug 12, 2026",
+    "size": "0 MB",
+    "type": "document",
+    "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Connection+Diagram-+Dubai+Waifi+Project.pdf",
+    "icon": "PenTool",
+    "iconColor": "green-text",
+    "tagColor": "green-tag"
+  },
+  {
+    "id": "1786516888632",
+    "name": "Back Frame Drawing Dubai Wafi Mall",
+    "category": "Drawings",
+    "date": "Aug 12, 2026",
+    "size": "0 MB",
+    "type": "document",
+    "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Back+Frame+Drawing-Dubai+Wafi+Mall.pdf",
+    "icon": "PenTool",
+    "iconColor": "green-text",
+    "tagColor": "green-tag"
+  },
+  {
+    "id": "1786516825431",
+    "name": "Led wall installation video 4",
+    "category": "Videos",
+    "date": "Aug 12, 2026",
+    "size": "0 MB",
+    "type": "video",
+    "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Installation-Video4.mp4",
+    "icon": "PlaySquare",
+    "iconColor": "purple-text",
+    "tagColor": "purple-tag"
+  },
+  {
+    "id": "1786516802513",
+    "name": "Led wall installation video 3",
+    "category": "Videos",
+    "date": "Aug 12, 2026",
+    "size": "0 MB",
+    "type": "video",
+    "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Installation-Video3.mp4",
+    "icon": "PlaySquare",
+    "iconColor": "purple-text",
+    "tagColor": "purple-tag"
+  },
+  {
+    "id": "1786516779710",
+    "name": "Led wall installation video 2",
+    "category": "Videos",
+    "date": "Aug 12, 2026",
+    "size": "0 MB",
+    "type": "video",
+    "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Installation-Video2.mp4",
+    "icon": "PlaySquare",
+    "iconColor": "purple-text",
+    "tagColor": "purple-tag"
+  },
+  {
+    "id": "1786516325148",
+    "name": "Led wall installation video 1 ",
+    "category": "Videos",
+    "date": "Aug 12, 2026",
+    "size": "0 MB",
+    "type": "video",
+    "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Installation-Video1.mp4",
+    "icon": "PlaySquare",
+    "iconColor": "purple-text",
+    "tagColor": "purple-tag"
+  }
+]

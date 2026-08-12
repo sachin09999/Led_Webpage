@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Wall Docs</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Mobile Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i data-lucide="hexagon" class="logo-icon"></i>
+                </div>
+                <span class="logo-text">LED Wall Docs</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i data-lucide="home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="file-text"></i>
+                    <span>LED Wall Docs</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="play-square"></i>
+                    <span>Videos</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="pen-tool"></i>
+                    <span>Drawings</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="image"></i>
+                    <span>Pictures</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="pie-chart"></i>
+                    <span>Finance Data</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i data-lucide="life-buoy"></i>
+                    <span>Support Data</span>
+                </a>
+            </nav>
+
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <button class="menu-btn" id="menuBtn">
+                    <i data-lucide="menu"></i>
+                </button>
+                <div class="search-bar">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" placeholder="Search documents, videos, drawings, images...">
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn"><i data-lucide="bell"></i></button>
+                    <button class="icon-btn" id="themeBtn"><i data-lucide="moon" id="themeIcon"></i></button>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <h1>LED Wall Docs</h1>
+                        <p>All important documents, videos, drawings, images<br>and support data in one place.</p>
+                        <div class="hero-search">
+                            <i data-lucide="search"></i>
+                            <input type="text" placeholder="Search...">
+                            <button class="primary-btn">Search</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Categories Grid -->
+                <section class="categories-grid">
+                    <!-- Card 1 -->
+                    <div class="category-card">
+                        <div class="card-icon blue-icon">
+                            <i data-lucide="file-text"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>LED Wall Docs</h3>
+                            <p>Technical documents, manuals<br>and specifications.</p>
+                            <div class="card-footer">
+                                <span class="tag blue-tag">12 Documents</span>
+                                <i data-lucide="chevron-right" class="arrow-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="category-card">
+                        <div class="card-icon purple-icon">
+                            <i data-lucide="play-square"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Videos</h3>
+                            <p>Installation videos, 360° videos<br>and tutorial content.</p>
+                            <div class="card-footer">
+                                <span class="tag purple-tag">15 Videos</span>
+                                <i data-lucide="chevron-right" class="arrow-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="category-card">
+                        <div class="card-icon green-icon">
+                            <i data-lucide="pen-tool"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Drawings</h3>
+                            <p>Wiring diagrams, schematics<br>and technical drawings.</p>
+                            <div class="card-footer">
+                                <span class="tag green-tag">8 Drawings</span>
+                                <i data-lucide="chevron-right" class="arrow-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="category-card">
+                        <div class="card-icon orange-icon">
+                            <i data-lucide="image"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Pictures</h3>
+                            <p>All connection photos, wiring<br>images and references.</p>
+                            <div class="card-footer">
+                                <span class="tag orange-tag">23 Images</span>
+                                <i data-lucide="chevron-right" class="arrow-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="category-card">
+                        <div class="card-icon yellow-icon">
+                            <i data-lucide="pie-chart"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Finance Data</h3>
+                            <p>Purchase history, spares<br>and cost related data.</p>
+                            <div class="card-footer">
+                                <span class="tag yellow-tag">9 Records</span>
+                                <i data-lucide="chevron-right" class="arrow-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="category-card">
+                        <div class="card-icon blue-icon">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Support Data</h3>
+                            <p>Spares location, support<br>contacts and more.</p>
+                            <div class="card-footer">
+                                <span class="tag blue-tag">6 Locations</span>
+                                <i data-lucide="chevron-right" class="arrow-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Files -->
+                <section class="recent-files">
+                    <div class="section-header">
+                        <h2>Recent Files</h2>
+                        <a href="#" class="view-all-link">View all</a>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Date Added</th>
+                                    <th>Size</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i data-lucide="file-text" class="blue-text"></i></td>
+                                    <td class="font-medium">LED Wall Installation Manual v2.1.pdf</td>
+                                    <td><span class="tag blue-tag">LED Wall Docs</span></td>
+                                    <td class="text-gray">May 20, 2024</td>
+                                    <td class="text-gray">4.8 MB</td>
+                                    <td><button class="icon-btn-small"><i data-lucide="more-vertical"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td><i data-lucide="play-square" class="purple-text"></i></td>
+                                    <td class="font-medium">Insta 360° Installation Guide.mp4</td>
+                                    <td><span class="tag purple-tag">Videos</span></td>
+                                    <td class="text-gray">May 18, 2024</td>
+                                    <td class="text-gray">128.6 MB</td>
+                                    <td><button class="icon-btn-small"><i data-lucide="more-vertical"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td><i data-lucide="image" class="green-text"></i></td>
+                                    <td class="font-medium">Power Wiring Diagram.pdf</td>
+                                    <td><span class="tag green-tag">Drawings</span></td>
+                                    <td class="text-gray">May 17, 2024</td>
+                                    <td class="text-gray">2.1 MB</td>
+                                    <td><button class="icon-btn-small"><i data-lucide="more-vertical"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="view-all-files">
+                        <button class="outline-btn">
+                            <i data-lucide="folder"></i>
+                            View all files
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
