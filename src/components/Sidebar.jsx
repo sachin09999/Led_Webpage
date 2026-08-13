@@ -1,13 +1,14 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Hexagon, Home, FileText, PlaySquare, PenTool, Image as ImageIcon, PieChart, LifeBuoy, Settings } from 'lucide-react';
+import { Hexagon, Home, Clock, FileText, PlaySquare, PenTool, Image as ImageIcon, PieChart, LifeBuoy, Settings } from 'lucide-react';
 
 export default function Sidebar({ isOpen, setIsOpen }) {
     const pathname = usePathname();
 
     const navItems = [
         { name: 'Dashboard', href: '/', icon: Home },
+        { name: 'Recent Files', href: '/recent', icon: Clock },
         { name: 'LED Wall Docs', href: '/docs', icon: FileText },
         { name: 'Videos', href: '/videos', icon: PlaySquare },
         { name: 'Drawings', href: '/drawings', icon: PenTool },

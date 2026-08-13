@@ -24,14 +24,7 @@ export default function Header({ toggleSidebar, isDark, toggleDark }) {
                 </button>
             )}
 
-            <form className="search-bar" onSubmit={(e) => {
-                e.preventDefault();
-                const query = e.target.search.value;
-                if (query) router.push(`/search?q=${encodeURIComponent(query)}`);
-            }}>
-                <Search className="search-icon" size={20} />
-                <input name="search" type="text" placeholder="Search documents, videos, drawings, images..." />
-            </form>
+            <div className="spacer" style={{ flex: 1 }}></div>
             <div className="header-actions">
                 <button className="icon-btn">
                     <Bell size={20} />
