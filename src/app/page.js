@@ -20,7 +20,7 @@ export default async function MainHub() {
       textAlign: 'center',
       padding: '2rem 1rem'
     }}>
-      <h1 style={{ fontSize: '2.5rem', marginBottom: '0.75rem', fontWeight: 700 }}>Select Project Dashboard</h1>
+      <h1 style={{ fontSize: '2.5rem', marginBottom: '0.75rem', fontWeight: 700 }}>Wafi Command Centre Dashboard</h1>
       <p style={{ color: 'var(--text-muted)', marginBottom: '2.5rem', fontSize: '1.1rem', maxWidth: '600px' }}>
         Choose the system you want to manage or view documentation for.
       </p>
