@@ -14,12 +14,12 @@ export async function getFiles() {
     } catch (error) {
         console.log("Database not found, initializing fresh store...");
         const defaultData = [
-            { id: "1", name: "LED Wall Installation Manual v2.1.pdf", category: "LED Wall Docs", date: "May 20, 2024", size: "4.8 MB", icon: "FileText", iconColor: "blue-text", tagColor: "blue-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
-            { id: "2", name: "Insta 360° Installation Guide.mp4", category: "Videos", date: "May 18, 2024", size: "128.6 MB", icon: "PlaySquare", iconColor: "purple-text", tagColor: "purple-tag", type: "video", url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-            { id: "3", name: "Power Wiring Diagram.pdf", category: "Drawings", date: "May 17, 2024", size: "2.1 MB", icon: "PenTool", iconColor: "green-text", "tagColor": "green-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
-            { id: "4", name: "Rigging Reference 1.jpg", category: "Pictures", date: "May 01, 2024", size: "5.2 MB", icon: "ImageIcon", iconColor: "orange-text", "tagColor": "orange-tag", type: "image", url: "https://picsum.photos/800/600" },
-            { id: "5", name: "Q1 Purchase History.pdf", category: "Finance Data", date: "Apr 05, 2024", size: "0.8 MB", icon: "PieChart", iconColor: "yellow-text", "tagColor": "yellow-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
-            { id: "6", name: "Global Contacts List.pdf", category: "Support Data", date: "Jan 15, 2024", size: "0.5 MB", icon: "LifeBuoy", iconColor: "blue-text", "tagColor": "blue-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" }
+            { id: "1", name: "LED Wall Installation Manual v2.1.pdf", category: "Docs", dashboardSlug: "wafi-command-centre", date: "May 20, 2026", size: "4.8 MB", icon: "FileText", iconColor: "blue-text", tagColor: "blue-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
+            { id: "2", name: "Insta 360° Installation Guide.mp4", category: "Videos", dashboardSlug: "wafi-command-centre", date: "May 18, 2026", size: "128.6 MB", icon: "PlaySquare", iconColor: "purple-text", tagColor: "purple-tag", type: "video", url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+            { id: "3", name: "Power Wiring Diagram.pdf", category: "Drawings", dashboardSlug: "wafi-command-centre", date: "May 17, 2026", size: "2.1 MB", icon: "PenTool", iconColor: "green-text", tagColor: "green-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
+            { id: "4", name: "Rigging Reference 1.jpg", category: "Pictures", dashboardSlug: "wafi-command-centre", date: "May 01, 2026", size: "5.2 MB", icon: "ImageIcon", iconColor: "orange-text", tagColor: "orange-tag", type: "image", url: "https://picsum.photos/800/600" },
+            { id: "5", name: "Q1 Purchase History.pdf", category: "Finance Data", dashboardSlug: "wafi-command-centre", date: "Apr 05, 2026", size: "0.8 MB", icon: "PieChart", iconColor: "yellow-text", tagColor: "yellow-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
+            { id: "6", name: "Global Contacts List.pdf", category: "Support Data", dashboardSlug: "wafi-command-centre", date: "Jan 15, 2026", size: "0.5 MB", icon: "LifeBuoy", iconColor: "blue-text", tagColor: "blue-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" }
         ];
         try {
             await fs.mkdir(path.dirname(dataFilePath), { recursive: true });
@@ -32,27 +32,28 @@ export async function getFiles() {
 }
 
 function determineStyles(category) {
-    switch (category) {
-        case 'LED Wall Docs': return { icon: 'FileText', iconColor: 'blue-text', tagColor: 'blue-tag' };
-        case 'Videos': return { icon: 'PlaySquare', iconColor: 'purple-text', tagColor: 'purple-tag' };
-        case 'Drawings': return { icon: 'PenTool', iconColor: 'green-text', tagColor: 'green-tag' };
-        case 'Pictures': return { icon: 'ImageIcon', iconColor: 'orange-text', tagColor: 'orange-tag' };
-        case 'Finance Data': return { icon: 'PieChart', iconColor: 'yellow-text', tagColor: 'yellow-tag' };
-        case 'Support Data': return { icon: 'LifeBuoy', iconColor: 'blue-text', tagColor: 'blue-tag' };
-        default: return { icon: 'FileText', iconColor: 'blue-text', tagColor: 'blue-tag' };
-    }
+    const catLower = (category || '').toLowerCase();
+    if (catLower.includes('doc')) return { icon: 'FileText', iconColor: 'blue-text', tagColor: 'blue-tag' };
+    if (catLower.includes('video')) return { icon: 'PlaySquare', iconColor: 'purple-text', tagColor: 'purple-tag' };
+    if (catLower.includes('drawing')) return { icon: 'PenTool', iconColor: 'green-text', tagColor: 'green-tag' };
+    if (catLower.includes('picture') || catLower.includes('photo') || catLower.includes('image')) return { icon: 'ImageIcon', iconColor: 'orange-text', tagColor: 'orange-tag' };
+    if (catLower.includes('finance')) return { icon: 'PieChart', iconColor: 'yellow-text', tagColor: 'yellow-tag' };
+    if (catLower.includes('support')) return { icon: 'LifeBuoy', iconColor: 'blue-text', tagColor: 'blue-tag' };
+    return { icon: 'FileText', iconColor: 'blue-text', tagColor: 'blue-tag' };
 }
 
 export async function addFile(formData) {
     const files = await getFiles();
     
     const category = formData.get('category');
+    const dashboardSlug = formData.get('dashboardSlug') || 'wafi-command-centre';
     const { icon, iconColor, tagColor } = determineStyles(category);
 
     const newFile = {
         id: Date.now().toString(),
         name: formData.get('name'),
         category: category,
+        dashboardSlug: dashboardSlug,
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
         size: formData.get('size') || '-',
         type: formData.get('type') || 'document',
@@ -74,12 +75,14 @@ export async function updateFile(id, formData) {
     if (index === -1) return;
 
     const category = formData.get('category');
+    const dashboardSlug = formData.get('dashboardSlug') || files[index].dashboardSlug || 'wafi-command-centre';
     const { icon, iconColor, tagColor } = determineStyles(category);
 
     files[index] = {
         ...files[index],
         name: formData.get('name'),
         category: category,
+        dashboardSlug: dashboardSlug,
         size: formData.get('size'),
         type: formData.get('type'),
         url: formData.get('url'),
