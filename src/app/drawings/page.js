@@ -9,10 +9,7 @@ export default async function DrawingsPage() {
 
     return (
         <section className="recent-files" style={{ paddingBottom: '0' }}>
-            <div className="section-header">
-                <h2>Drawings</h2>
-            </div>
-            <RecentFilesTable files={files} />
+            <RecentFilesTable files={files} title="Drawings" category="Drawings" dashboardSlug="ledwalldocs" />
         </section>
     );
 }

@@ -33,7 +33,7 @@ export default async function SearchPage({ searchParams }) {
         <section className="recent-files" style={{ paddingBottom: '0' }}>
             <div style={{ marginBottom: '1.5rem', textAlign: 'left' }}>
                 <h2 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.25rem' }}>
-                    Search Results for "{q}" {dashboardObj ? `in ${dashboardObj.name}` : ''}
+                    Search Results for &quot;{q}&quot; {dashboardObj ? `in ${dashboardObj.name}` : ''}
                 </h2>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>
                     {files.length} {files.length === 1 ? 'item' : 'items'} found

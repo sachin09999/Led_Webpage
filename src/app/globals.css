@@ -414,7 +414,6 @@ body {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 16px;
-    overflow: hidden;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
@@ -440,6 +439,8 @@ body {
 
 .table-container {
     overflow-x: auto;
+    min-height: 240px;
+    padding-bottom: 60px;
 }
 
 table {

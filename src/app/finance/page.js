@@ -9,10 +9,7 @@ export default async function FinancePage() {
 
     return (
         <section className="recent-files" style={{ paddingBottom: '0' }}>
-            <div className="section-header">
-                <h2>Finance Data</h2>
-            </div>
-            <RecentFilesTable files={files} />
+            <RecentFilesTable files={files} title="Finance Data" category="Finance Data" dashboardSlug="ledwalldocs" />
         </section>
     );
 }

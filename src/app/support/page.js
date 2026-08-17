@@ -9,10 +9,7 @@ export default async function SupportPage() {
 
     return (
         <section className="recent-files" style={{ paddingBottom: '0' }}>
-            <div className="section-header">
-                <h2>Support Data</h2>
-            </div>
-            <RecentFilesTable files={files} />
+            <RecentFilesTable files={files} title="Support Data" category="Support Data" dashboardSlug="ledwalldocs" />
         </section>
     );
 }

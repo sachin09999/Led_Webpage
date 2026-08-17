@@ -9,10 +9,7 @@ export default async function PicturesPage() {
 
     return (
         <section className="recent-files" style={{ paddingBottom: '0' }}>
-            <div className="section-header">
-                <h2>Pictures</h2>
-            </div>
-            <RecentFilesTable files={files} />
+            <RecentFilesTable files={files} title="Pictures" category="Pictures" dashboardSlug="ledwalldocs" />
         </section>
     );
 }

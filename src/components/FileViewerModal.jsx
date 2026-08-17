@@ -15,10 +15,18 @@ export default function FileViewerModal({ file, onClose }) {
         };
     }, [onClose]);
 
-    if (!file) return null;
+    const rawUrl = file.url || '';
+    let resolvedUrl = rawUrl;
+    if (typeof window !== 'undefined' && rawUrl.includes(':9005')) {
+        const currentHost = window.location.hostname;
+        if (currentHost && currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
+            resolvedUrl = rawUrl.replace(/localhost:9005/g, `${currentHost}:9005`)
+                               .replace(/127\.0\.0\.1:9005/g, `${currentHost}:9005`);
+        }
+    }
 
-    const isVideo = file.url.match(/\.(mp4|webm|ogg)$/i) || file.type === 'video';
-    const isImage = file.url.match(/\.(jpeg|jpg|gif|png|webp)$/i) || file.type === 'image';
+    const isVideo = resolvedUrl.match(/\.(mp4|webm|ogg)$/i) || file.type === 'video';
+    const isImage = resolvedUrl.match(/\.(jpeg|jpg|gif|png|webp)$/i) || file.type === 'image';
 
     return (
         <div className="viewer-overlay" onClick={onClose}>
@@ -31,11 +39,11 @@ export default function FileViewerModal({ file, onClose }) {
                 </div>
                 <div className="viewer-body">
                     {isVideo ? (
-                        <video src={file.url} controls autoPlay className="viewer-media" />
+                        <video src={resolvedUrl} controls autoPlay className="viewer-media" />
                     ) : isImage ? (
-                        <img src={file.url} alt={file.name} className="viewer-media" />
+                        <img src={resolvedUrl} alt={file.name} className="viewer-media" />
                     ) : (
-                        <iframe src={file.url} className="viewer-iframe" title={file.name} />
+                        <iframe src={resolvedUrl} className="viewer-iframe" title={file.name} />
                     )}
                 </div>
             </div>

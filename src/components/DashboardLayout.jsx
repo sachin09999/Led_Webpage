@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, Suspense } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import { useFileViewer } from '@/context/FileViewerContext';
@@ -25,7 +26,9 @@ export default function DashboardLayout({ children }) {
                 onClick={() => setIsSidebarOpen(false)}
             ></div>
             
-            <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+            <Suspense fallback={null}>
+                <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+            </Suspense>
             
             <main className="main-content">
                 <Header 

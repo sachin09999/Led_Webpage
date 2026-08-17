@@ -3,6 +3,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { revalidatePath } from 'next/cache';
+import { uploadToMinIO } from '@/lib/minioClient';
 
 const dataFilePath = path.join(process.cwd(), 'data', 'store.json');
 
@@ -100,4 +101,34 @@ export async function deleteFile(id) {
     const updatedFiles = files.filter(f => f.id !== id);
     await fs.writeFile(dataFilePath, JSON.stringify(updatedFiles, null, 2));
     revalidatePath('/', 'layout');
+}
+
+export async function uploadFileToMinIOAction(formData) {
+    const file = formData.get('file');
+    if (!file || typeof file === 'string') {
+        throw new Error('No file provided');
+    }
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    const { fileUrl } = await uploadToMinIO(buffer, file.name, file.type);
+
+    const sizeInMB = (file.size / (1024 * 1024)).toFixed(1);
+    const formattedSize = `${sizeInMB} MB`;
+
+    // Detect type
+    let itemType = 'document';
+    if (file.type.startsWith('video/') || file.name.match(/\.(mp4|webm|mkv|mov)$/i)) {
+        itemType = 'video';
+    } else if (file.type.startsWith('image/') || file.name.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+        itemType = 'image';
+    }
+
+    return { 
+        fileUrl, 
+        fileName: file.name, 
+        fileSize: formattedSize, 
+        fileType: itemType 
+    };
 }

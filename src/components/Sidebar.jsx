@@ -2,22 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import DynamicIcon from './IconHelper';
 import { getDashboards } from '@/actions/dashboardActions';
 
 export default function Sidebar({ isOpen, setIsOpen }) {
     const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const dashParam = searchParams.get('dash');
     const [dashboards, setDashboards] = useState([]);
-    const [dashParam, setDashParam] = useState(null);
 
     useEffect(() => {
         getDashboards().then(res => setDashboards(res || [])).catch(() => {});
-        if (typeof window !== 'undefined') {
-            const params = new URLSearchParams(window.location.search);
-            setDashParam(params.get('dash'));
-        }
-    }, [pathname]);
+    }, []);
 
     // Determine current active dashboard slug from pathname (e.g. /wtp/docs -> slug = wtp)
     // or from search param (e.g. /search?q=led&dash=ledwalldocs -> slug = ledwalldocs)
@@ -48,14 +45,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                 >
                     <DynamicIcon name="Home" size={20} />
                     <span>Main Hub</span>
-                </Link>
-                <Link 
-                    href={currentDashboard ? `/admin?dash=${currentDashboard.slug}` : "/admin"} 
-                    className={`nav-item ${pathname === '/admin' ? 'active' : ''}`}
-                    onClick={() => setIsOpen(false)}
-                >
-                    <DynamicIcon name="Settings" size={20} />
-                    <span>{currentDashboard ? `${currentDashboard.name} Admin` : 'Main Admin Panel'}</span>
                 </Link>
 
                 {/* Project Dashboards Section */}

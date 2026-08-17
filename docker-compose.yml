@@ -8,6 +8,30 @@ services:
       - ./:/app
       - /app/node_modules # Prevents local node_modules from overwriting container's
       - ./data:/app/data
+      - ./minio-data:/app/minio-data
     ports:
       - "8080:3000"
-    command: sh -c "npm run build && npm run start"
+    environment:
+      - MINIO_ENDPOINT=minio
+      - MINIO_PORT=9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
+      - MINIO_BUCKET=wafi-media
+      - MINIO_PUBLIC_URL=http://localhost:9005
+    depends_on:
+      - minio
+    command: sh -c "npm install && npm run build && npm run start"
+
+  minio:
+    image: minio/minio:latest
+    container_name: wafi_minio
+    restart: always
+    ports:
+      - "9005:9000" # MinIO S3 API mapped to host port 9005
+      - "9006:9001" # MinIO Web Console mapped to host port 9006
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - ./minio-data:/data
+    command: server /data --console-address ":9001"

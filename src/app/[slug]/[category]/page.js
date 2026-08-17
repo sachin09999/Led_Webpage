@@ -39,10 +39,12 @@ export default async function DynamicCategoryPage({ params }) {
 
     return (
         <section className="recent-files" style={{ paddingBottom: '0' }}>
-            <div className="section-header">
-                <h2>{categoryTitle}</h2>
-            </div>
-            <RecentFilesTable files={filteredFiles} />
+            <RecentFilesTable 
+                files={filteredFiles} 
+                title={categoryTitle} 
+                category={categoryTitle} 
+                dashboardSlug={dashboard.slug} 
+            />
         </section>
     );
 }

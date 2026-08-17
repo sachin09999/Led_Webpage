@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function DashboardHero({ 
@@ -25,6 +25,14 @@ export default function DashboardHero({
         if (query.trim()) {
             const dashParam = dashboardSlug ? `&dash=${encodeURIComponent(dashboardSlug)}` : '';
             router.push(`/search?q=${encodeURIComponent(query.trim())}${dashParam}`);
+        }
+    };
+
+    const handleAdminClick = () => {
+        if (dashboardSlug) {
+            router.push(`/admin?dash=${encodeURIComponent(dashboardSlug)}`);
+        } else {
+            router.push('/admin');
         }
     };
 

@@ -8,10 +8,7 @@ export default async function RecentPage() {
 
     return (
         <section className="recent-files" style={{ paddingBottom: '0' }}>
-            <div className="section-header">
-                <h2>Recent Files</h2>
-            </div>
-            <RecentFilesTable files={files} />
+            <RecentFilesTable files={files} title="Recent Files" category="Docs" dashboardSlug="ledwalldocs" />
         </section>
     );
 }
