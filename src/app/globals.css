@@ -685,3 +685,106 @@ tr:hover td {
         padding: 12px;
     }
 }
+
+/* Grid & List View Toggle Styles */
+.view-toggle-group {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-color, #f3f4f6);
+    border: 1px solid var(--border-color, #e5e7eb);
+    padding: 3px;
+    border-radius: 10px;
+    gap: 2px;
+}
+
+.view-toggle-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-muted, #6b7280);
+    padding: 6px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.view-toggle-btn.active {
+    background: var(--card-bg, #ffffff);
+    color: var(--primary-blue, #3b82f6);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.data-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    padding: 16px 0;
+}
+
+.grid-card {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.grid-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.grid-card-media {
+    width: 100%;
+    height: 150px;
+    background: var(--bg-color, #f9fafb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-card-media img,
+.grid-card-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grid-card-body {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.grid-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.grid-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color, #f3f4f6);
+}
+

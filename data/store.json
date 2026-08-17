@@ -1,5 +1,18 @@
 [
   {
+    "id": "1786970431820",
+    "name": "CUET (UG) - 2026.pdf",
+    "category": "WTP Drawings",
+    "dashboardSlug": "wtp",
+    "date": "Aug 17, 2026",
+    "size": "0.6 MB",
+    "type": "document",
+    "url": "http://localhost:9005/wafi-media/1786970431796_CUET__UG__-_2026.pdf",
+    "icon": "PenTool",
+    "iconColor": "green-text",
+    "tagColor": "green-tag"
+  },
+  {
     "id": "1786711925890",
     "name": "Ai Server",
     "category": "Pictures",
