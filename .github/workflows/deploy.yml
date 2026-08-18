@@ -10,8 +10,9 @@ jobs:
     steps:
       - name: Fix Workspace Permissions
         run: |
-          sudo chown -R $USER:$USER /home/rmg/Waff_CC_Webpage/Led_Webpage/actions-runner/_work/Led_Webpage/Led_Webpage 2>/dev/null || true
-          rm -rf /home/rmg/Waff_CC_Webpage/Led_Webpage/actions-runner/_work/Led_Webpage/Led_Webpage/.next 2>/dev/null || true
+          sudo chown -R $USER:$USER . 2>/dev/null || true
+          rm -rf .next 2>/dev/null || true
+          rm -rf minio-data/.minio.sys/tmp 2>/dev/null || true
 
       - name: Checkout Repository Code
         uses: actions/checkout@v4

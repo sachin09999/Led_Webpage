@@ -31,3 +31,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# MinIO system internal state (prevents root permission errors)
+minio-data/.minio.sys/
