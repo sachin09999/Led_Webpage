@@ -179,10 +179,11 @@ export default function RecentFilesTable({
                 />
             )}
 
-            {/* Folders Grid */}
+            {/* Folders Grid / List */}
             <FolderGrid 
                 folders={visibleFolders} 
                 files={files} 
+                viewMode={viewMode}
                 onOpenFolder={handleOpenFolder} 
                 onRefresh={loadFolders}
             />

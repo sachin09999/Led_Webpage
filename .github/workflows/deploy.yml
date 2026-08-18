@@ -1,4 +1,4 @@
-name: Deploy via SSH to PC
+name: Auto Deploy UAE Server
 
 on:
   push:
@@ -6,18 +6,11 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted
     steps:
-      - name: SSH to PC, Pull Latest Code & Restart
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT || 22 }}
-          script: |
-            cd /home/dts-sachin/Documents/Wafi_Command_Centre
-            git pull origin main
-            docker compose up -d --build
-
+      - name: Pull Latest Code & Rebuild Docker
+        run: |
+          cd "$HOME/Led_Webpage/Led_Webpage-main (2)/Led_Webpage-main" || cd ~/Led_Webpage/* || cd ~/Documents/Wafi_Command_Centre
+          git pull origin main
+          docker compose down
+          docker compose up -d --build

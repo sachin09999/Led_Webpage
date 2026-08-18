@@ -25,7 +25,7 @@ export default function AddMaterialModal({
     // Form state
     const [name, setName] = useState('');
     const [url, setUrl] = useState('');
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFiles, setSelectedFiles] = useState([]);
     const [dashboardSlug, setDashboardSlug] = useState(defaultDashboardSlug);
     const [category, setCategory] = useState(defaultCategory);
     const [type, setType] = useState(() => {
@@ -65,52 +65,59 @@ export default function AddMaterialModal({
 
         if (catLower.includes('video') || typeLower === 'video') {
             return {
-                prompt: 'Click to select video',
+                prompt: 'Click or drop video files here',
                 accept: 'video/*'
             };
         }
         if (catLower.includes('picture') || catLower.includes('photo') || catLower.includes('image') || typeLower === 'image') {
             return {
-                prompt: 'Click to select image',
+                prompt: 'Click or drop image files here',
                 accept: 'image/*'
             };
         }
         if (catLower.includes('drawing')) {
             return {
-                prompt: 'Click to select drawing',
+                prompt: 'Click or drop drawing files here',
                 accept: '.pdf,.dwg,.dxf,.png,.jpg,.jpeg,.docx,.doc'
             };
         }
         if (catLower.includes('finance') || catLower.includes('support')) {
             return {
-                prompt: 'Click to select file',
+                prompt: 'Click or drop files here',
                 accept: '.pdf,.xlsx,.xls,.csv,.docx,.doc,.zip'
             };
         }
         return {
-            prompt: 'Click to select document',
+            prompt: 'Click or drop document files here',
             accept: '.pdf,.docx,.doc,.xlsx,.xls,.txt,.pptx'
         };
     };
 
     const uploadGuidance = getUploadGuidance();
 
-    // Handle file selection
+    // Handle multiple file selection
     const handleFileChange = (e) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            setSelectedFile(file);
-            setName(file.name);
+        const files = Array.from(e.target.files || []);
+        if (files.length > 0) {
+            setSelectedFiles(prev => [...prev, ...files]);
+            if (!name.trim()) {
+                setName(files[0].name);
+            }
 
-            // Auto detect type
-            if (file.type.startsWith('video/') || file.name.match(/\.(mp4|webm|mkv|mov)$/i)) {
+            // Auto detect type from first file
+            const first = files[0];
+            if (first.type.startsWith('video/') || first.name.match(/\.(mp4|webm|mkv|mov)$/i)) {
                 setType('video');
-            } else if (file.type.startsWith('image/') || file.name.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+            } else if (first.type.startsWith('image/') || first.name.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
                 setType('image');
             } else {
                 setType('document');
             }
         }
+    };
+
+    const handleRemoveFile = (indexToRemove) => {
+        setSelectedFiles(prev => prev.filter((_, idx) => idx !== indexToRemove));
     };
 
     // Handle dashboard change (if unlocked)
@@ -133,52 +140,73 @@ export default function AddMaterialModal({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name.trim()) return;
 
         setIsSubmitting(true);
         setStatusMessage('');
 
         try {
-            let finalUrl = url.trim();
-            let fileSize = '-';
-
-            // Mode 1: File upload via MinIO
             if (mode === 'file') {
-                if (!selectedFile) {
-                    alert('Please select a file to upload.');
+                if (selectedFiles.length === 0) {
+                    alert('Please select at least one file to upload.');
                     setIsSubmitting(false);
                     return;
                 }
 
-                setStatusMessage('Uploading file...');
-                const uploadData = new FormData();
-                uploadData.append('file', selectedFile);
+                // Batch upload files to MinIO
+                const total = selectedFiles.length;
+                for (let i = 0; i < total; i++) {
+                    const currentFile = selectedFiles[i];
+                    setStatusMessage(`Uploading file ${i + 1} of ${total}: ${currentFile.name}...`);
 
-                const res = await uploadFileToMinIOAction(uploadData);
-                finalUrl = res.fileUrl;
-                fileSize = res.fileSize;
+                    const uploadData = new FormData();
+                    uploadData.append('file', currentFile);
+
+                    const res = await uploadFileToMinIOAction(uploadData);
+                    
+                    // Determine display name
+                    const displayName = (total === 1 && name.trim()) ? name.trim() : currentFile.name;
+
+                    const formData = new FormData();
+                    formData.append('name', displayName);
+                    formData.append('url', res.fileUrl);
+                    formData.append('category', category);
+                    formData.append('type', res.fileType || type);
+                    formData.append('dashboardSlug', dashboardSlug);
+                    if (currentFolderId) {
+                        formData.append('folderId', currentFolderId);
+                    }
+                    formData.append('size', res.fileSize);
+
+                    await addFile(formData);
+                }
             } else {
                 // Mode 2: External link URL
+                if (!name.trim()) {
+                    alert('Please enter a display name.');
+                    setIsSubmitting(false);
+                    return;
+                }
+                const finalUrl = url.trim();
                 if (!finalUrl) {
                     alert('Please enter a valid media URL link.');
                     setIsSubmitting(false);
                     return;
                 }
-            }
 
-            setStatusMessage('Saving item to database...');
-            const formData = new FormData();
-            formData.append('name', name.trim());
-            formData.append('url', finalUrl);
-            formData.append('category', category);
-            formData.append('type', type);
-            formData.append('dashboardSlug', dashboardSlug);
-            if (currentFolderId) {
-                formData.append('folderId', currentFolderId);
-            }
-            formData.append('size', fileSize);
+                setStatusMessage('Saving item to database...');
+                const formData = new FormData();
+                formData.append('name', name.trim());
+                formData.append('url', finalUrl);
+                formData.append('category', category);
+                formData.append('type', type);
+                formData.append('dashboardSlug', dashboardSlug);
+                if (currentFolderId) {
+                    formData.append('folderId', currentFolderId);
+                }
+                formData.append('size', '-');
 
-            await addFile(formData);
+                await addFile(formData);
+            }
 
             setIsSubmitting(false);
             setStatusMessage('');
@@ -200,6 +228,8 @@ export default function AddMaterialModal({
                 style={{ 
                     maxWidth: '540px', 
                     height: 'auto', 
+                    maxHeight: '90vh',
+                    overflowY: 'auto',
                     borderRadius: '16px',
                     padding: '24px',
                     background: 'var(--card-bg, #ffffff)',
@@ -250,7 +280,7 @@ export default function AddMaterialModal({
                         }}
                     >
                         <UploadCloud size={16} />
-                        <span>Upload File</span>
+                        <span>Upload File(s)</span>
                     </button>
                     <button
                         type="button"
@@ -284,7 +314,7 @@ export default function AddMaterialModal({
                     {mode === 'file' && (
                         <div>
                             <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '6px' }}>
-                                Choose File from Computer *
+                                Choose File(s) from Computer *
                             </label>
                             <div 
                                 style={{
@@ -299,6 +329,7 @@ export default function AddMaterialModal({
                             >
                                 <input 
                                     type="file" 
+                                    multiple
                                     onChange={handleFileChange}
                                     accept={uploadGuidance.accept}
                                     style={{
@@ -309,24 +340,62 @@ export default function AddMaterialModal({
                                         height: '100%',
                                         cursor: 'pointer'
                                     }}
-                                    required={mode === 'file' && !selectedFile}
                                 />
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
                                     <div style={{ padding: '10px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
                                         <UploadCloud size={24} />
                                     </div>
-                                    {selectedFile ? (
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#10b981', fontWeight: 500, fontSize: '0.9rem' }}>
-                                            <CheckCircle2 size={18} />
-                                            <span>{selectedFile.name} ({(selectedFile.size / (1024 * 1024)).toFixed(1)} MB)</span>
-                                        </div>
-                                    ) : (
-                                        <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 500 }}>
-                                            {uploadGuidance.prompt}
-                                        </p>
-                                    )}
+                                    <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 500 }}>
+                                        {uploadGuidance.prompt}
+                                    </p>
+                                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted, #6b7280)' }}>
+                                        Supports selecting multiple files at once
+                                    </span>
                                 </div>
                             </div>
+
+                            {/* List of selected files */}
+                            {selectedFiles.length > 0 && (
+                                <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted, #6b7280)' }}>
+                                        Selected Files ({selectedFiles.length}):
+                                    </div>
+                                    <div style={{ maxHeight: '140px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                        {selectedFiles.map((file, idx) => (
+                                            <div 
+                                                key={`${file.name}-${idx}`} 
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'space-between',
+                                                    padding: '6px 10px',
+                                                    borderRadius: '8px',
+                                                    background: 'var(--bg-main, #f3f4f6)',
+                                                    fontSize: '0.82rem'
+                                                }}
+                                            >
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+                                                    <CheckCircle2 size={15} style={{ color: '#10b981', flexShrink: 0 }} />
+                                                    <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: 500 }}>
+                                                        {file.name}
+                                                    </span>
+                                                    <span style={{ color: 'var(--text-muted, #9ca3af)', fontSize: '0.75rem', flexShrink: 0 }}>
+                                                        ({(file.size / (1024 * 1024)).toFixed(1)} MB)
+                                                    </span>
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleRemoveFile(idx)}
+                                                    style={{ border: 'none', background: 'transparent', color: '#ef4444', cursor: 'pointer', padding: '2px 4px' }}
+                                                    title="Remove file"
+                                                >
+                                                    <X size={14} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
 
@@ -450,7 +519,7 @@ export default function AddMaterialModal({
                             disabled={isSubmitting}
                             style={{ padding: '8px 20px', borderRadius: '8px', fontWeight: 500 }}
                         >
-                            {isSubmitting ? 'Processing...' : mode === 'file' ? 'Upload & Add Item' : 'Add Item'}
+                            {isSubmitting ? 'Processing...' : mode === 'file' ? (selectedFiles.length > 1 ? `Upload ${selectedFiles.length} Files` : 'Upload & Add Item') : 'Add Item'}
                         </button>
                     </div>
                 </form>

@@ -16,6 +16,19 @@ export default function MoveFileModal({
 
     if (!file) return null;
 
+    // Filter destination folders strictly matching current file's dashboard and category
+    const validFolders = folders.filter(f => {
+        const fileDash = (file.dashboardSlug || 'ledwalldocs').toLowerCase();
+        const folderDash = (f.dashboardSlug || 'ledwalldocs').toLowerCase();
+        if (fileDash !== folderDash) return false;
+
+        const fileCat = (file.category || '').toLowerCase();
+        const folderCat = (f.category || '').toLowerCase();
+        if (fileCat && folderCat && fileCat !== folderCat) return false;
+
+        return true;
+    });
+
     const handleMove = async (e) => {
         e.preventDefault();
         setIsSaving(true);
@@ -67,10 +80,10 @@ export default function MoveFileModal({
                 <form onSubmit={handleMove} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     <div>
                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '8px' }}>
-                            Select Destination Folder:
+                            Select Destination Folder ({file.category || 'Category'}):
                         </label>
                         
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '200px', overflowY: 'auto' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '220px', overflowY: 'auto' }}>
                             <label
                                 style={{
                                     display: 'flex',
@@ -92,11 +105,11 @@ export default function MoveFileModal({
                                 />
                                 <Folder size={18} style={{ color: '#9ca3af' }} />
                                 <span style={{ fontSize: '0.875rem', fontWeight: selectedFolderId === '' ? 600 : 400 }}>
-                                    Root Level (No Folder)
+                                    Main View / Root Level
                                 </span>
                             </label>
 
-                            {folders.map(f => (
+                            {validFolders.map(f => (
                                 <label
                                     key={f.id}
                                     style={{
