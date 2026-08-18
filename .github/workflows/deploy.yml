@@ -8,9 +8,10 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Pull Latest Code & Rebuild Docker
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: Rebuild & Start Docker Containers
         run: |
-          cd "$HOME/Led_Webpage/Led_Webpage-main (2)/Led_Webpage-main" || cd ~/Led_Webpage/* || cd ~/Documents/Wafi_Command_Centre
-          git pull origin main
           docker compose down
           docker compose up -d --build
