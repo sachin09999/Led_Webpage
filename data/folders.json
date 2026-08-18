@@ -1,0 +1,173 @@
+[
+  {
+    "id": "folder-ledwalldocs-docs",
+    "name": "Docs & Manuals",
+    "parentId": null,
+    "category": "Docs",
+    "dashboardSlug": "ledwalldocs",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-network-docs",
+    "name": "Docs & Manuals",
+    "parentId": null,
+    "category": "Docs",
+    "dashboardSlug": "network",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-network-server-rack-2-docs",
+    "name": "Docs & Manuals",
+    "parentId": null,
+    "category": "Docs",
+    "dashboardSlug": "network-server-rack-2",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-ledwalldocs-drawings",
+    "name": "Drawings & Schematics",
+    "parentId": null,
+    "category": "Drawings",
+    "dashboardSlug": "ledwalldocs",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-network-drawings",
+    "name": "Drawings & Schematics",
+    "parentId": null,
+    "category": "Drawings",
+    "dashboardSlug": "network",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-network-server-rack-2-drawings",
+    "name": "Drawings & Schematics",
+    "parentId": null,
+    "category": "Drawings",
+    "dashboardSlug": "network-server-rack-2",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-ledwalldocs-finance-data",
+    "name": "Finance Data & Records",
+    "parentId": null,
+    "category": "Finance Data",
+    "dashboardSlug": "ledwalldocs",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-wtp-operations-data",
+    "name": "Operations Data Folder",
+    "parentId": null,
+    "category": "Operations Data",
+    "dashboardSlug": "wtp",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-ledwalldocs-pictures",
+    "name": "Pictures & Gallery",
+    "parentId": null,
+    "category": "Pictures",
+    "dashboardSlug": "ledwalldocs",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-network-pictures",
+    "name": "Pictures & Gallery",
+    "parentId": null,
+    "category": "Pictures",
+    "dashboardSlug": "network",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-network-server-rack-2-pictures",
+    "name": "Pictures & Gallery",
+    "parentId": null,
+    "category": "Pictures",
+    "dashboardSlug": "network-server-rack-2",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-ledwalldocs-support-data",
+    "name": "Support Data & Logs",
+    "parentId": null,
+    "category": "Support Data",
+    "dashboardSlug": "ledwalldocs",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-ledwalldocs-videos",
+    "name": "Videos & Demo1",
+    "parentId": null,
+    "category": "Videos",
+    "dashboardSlug": "ledwalldocs",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-network-videos",
+    "name": "Videos & Demos",
+    "parentId": null,
+    "category": "Videos",
+    "dashboardSlug": "network",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-network-server-rack-2-videos",
+    "name": "Videos & Demos",
+    "parentId": null,
+    "category": "Videos",
+    "dashboardSlug": "network-server-rack-2",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-wtp-wtp-docs",
+    "name": "WTP Docs & Manuals",
+    "parentId": null,
+    "category": "WTP Docs",
+    "dashboardSlug": "wtp",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-wtp-wtp-drawings",
+    "name": "WTP Drawings & Schematics",
+    "parentId": null,
+    "category": "WTP Drawings",
+    "dashboardSlug": "wtp",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-wtp-wtp-pictures",
+    "name": "WTP Pictures & Gallery",
+    "parentId": null,
+    "category": "WTP Pictures",
+    "dashboardSlug": "wtp",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  },
+  {
+    "id": "folder-wtp-wtp-videos",
+    "name": "WTP Videos & Demos",
+    "parentId": null,
+    "category": "WTP Videos",
+    "dashboardSlug": "wtp",
+    "color": "blue",
+    "createdAt": "Aug 18, 2026"
+  }
+]

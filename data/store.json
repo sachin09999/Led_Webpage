@@ -1,18 +1,5 @@
 [
   {
-    "id": "1786970431820",
-    "name": "CUET (UG) - 2026.pdf",
-    "category": "WTP Drawings",
-    "dashboardSlug": "wtp",
-    "date": "Aug 17, 2026",
-    "size": "0.6 MB",
-    "type": "document",
-    "url": "http://localhost:9005/wafi-media/1786970431796_CUET__UG__-_2026.pdf",
-    "icon": "PenTool",
-    "iconColor": "green-text",
-    "tagColor": "green-tag"
-  },
-  {
     "id": "1786711925890",
     "name": "Ai Server",
     "category": "Pictures",
@@ -23,7 +10,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Ai+Server.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786711975050",
@@ -36,7 +24,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/AP+1.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786711992297",
@@ -49,7 +38,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/AP+2.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786516888632",
@@ -62,7 +52,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Back+Frame+Drawing-Dubai+Wafi+Mall.pdf",
     "icon": "PenTool",
     "iconColor": "green-text",
-    "tagColor": "green-tag"
+    "tagColor": "green-tag",
+    "folderId": "folder-ledwalldocs-drawings"
   },
   {
     "id": "1786712014967",
@@ -75,7 +66,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Comperssion+Server.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786516930002",
@@ -83,12 +75,27 @@
     "category": "Drawings",
     "dashboardSlug": "ledwalldocs",
     "date": "Aug 12, 2026",
-    "size": "0 MB",
+    "size": null,
     "type": "document",
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Connection+Diagram-+Dubai+Waifi+Project.pdf",
     "icon": "PenTool",
     "iconColor": "green-text",
-    "tagColor": "green-tag"
+    "tagColor": "green-tag",
+    "folderId": "folder-ledwalldocs-drawings"
+  },
+  {
+    "id": "1786970431820",
+    "name": "CUET (UG) - 2026.pdf",
+    "category": "WTP Drawings",
+    "dashboardSlug": "wtp",
+    "date": "Aug 17, 2026",
+    "size": "0.6 MB",
+    "type": "document",
+    "url": "http://localhost:9005/wafi-media/1786970431796_CUET__UG__-_2026.pdf",
+    "icon": "PenTool",
+    "iconColor": "green-text",
+    "tagColor": "green-tag",
+    "folderId": "folder-wtp-wtp-drawings"
   },
   {
     "id": "1786712876037",
@@ -101,7 +108,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Devices+Explnation+Rack1.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-network-videos"
   },
   {
     "id": "1786712036281",
@@ -114,7 +122,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Firewall.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786712805816",
@@ -127,7 +136,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/how+to+turn+on+and+off+display_s.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-ledwalldocs-videos"
   },
   {
     "id": "1786712076935",
@@ -140,7 +150,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/LED+Wall.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-ledwalldocs-pictures"
   },
   {
     "id": "1786712754902",
@@ -153,7 +164,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/How+the+Display_s+is+Connected.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-ledwalldocs-videos"
   },
   {
     "id": "1786516325148",
@@ -166,7 +178,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Installation-Video1.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-ledwalldocs-videos"
   },
   {
     "id": "1786516779710",
@@ -179,7 +192,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Installation-Video2.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-ledwalldocs-videos"
   },
   {
     "id": "1786516802513",
@@ -192,7 +206,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Installation-Video3.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-ledwalldocs-videos"
   },
   {
     "id": "1786516825431",
@@ -205,7 +220,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Installation-Video4.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-ledwalldocs-videos"
   },
   {
     "id": "1786712930654",
@@ -218,7 +234,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/INVOICE+DUBAI.pdf",
     "icon": "PieChart",
     "iconColor": "yellow-text",
-    "tagColor": "yellow-tag"
+    "tagColor": "yellow-tag",
+    "folderId": "folder-ledwalldocs-finance-data"
   },
   {
     "id": "1786712139024",
@@ -231,7 +248,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/NAS+Storage.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786712434651",
@@ -244,7 +262,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Network+Topology-Diagram+Document.pdf",
     "icon": "FileText",
     "iconColor": "blue-text",
-    "tagColor": "blue-tag"
+    "tagColor": "blue-tag",
+    "folderId": "folder-network-docs"
   },
   {
     "id": "1786710759870",
@@ -257,7 +276,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/NVR.png",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786712583960",
@@ -270,7 +290,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/2-+NVR+and+Storage.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-network-videos"
   },
   {
     "id": "1786711159782",
@@ -283,7 +304,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Primary+Server.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786946291666",
@@ -296,7 +318,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Rack+2+Devices.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-network-server-rack-2-videos"
   },
   {
     "id": "1786946313721",
@@ -309,7 +332,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Rack+2+Topology.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-network-server-rack-2-videos"
   },
   {
     "id": "1786712317655",
@@ -322,7 +346,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Router.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786946362222",
@@ -335,7 +360,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Secondary+Server.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-server-rack-2-pictures"
   },
   {
     "id": "1786712344000",
@@ -348,7 +374,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Secondary+Server.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786711814813",
@@ -361,7 +388,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Server+Rack+1.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786946259500",
@@ -374,7 +402,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Server+Rack+2.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-server-rack-2-pictures"
   },
   {
     "id": "1786712363538",
@@ -387,7 +416,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Switch+1.jpeg",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786711868396",
@@ -400,7 +430,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Switch+2.png",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786712389161",
@@ -413,7 +444,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Switch+3.png",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786711886199",
@@ -426,7 +458,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Switch+4.png",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786712664850",
@@ -439,7 +472,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/How+the+System+Is+Connected.png",
     "icon": "PenTool",
     "iconColor": "green-text",
-    "tagColor": "green-tag"
+    "tagColor": "green-tag",
+    "folderId": "folder-network-drawings"
   },
   {
     "id": "1786712902788",
@@ -452,7 +486,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Topology+Rack+1.mp4",
     "icon": "PlaySquare",
     "iconColor": "purple-text",
-    "tagColor": "purple-tag"
+    "tagColor": "purple-tag",
+    "folderId": "folder-network-videos"
   },
   {
     "id": "1786950701246",
@@ -465,7 +500,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/EAV+Electric+ball+valve.pdf",
     "icon": "FileText",
     "iconColor": "blue-text",
-    "tagColor": "blue-tag"
+    "tagColor": "blue-tag",
+    "folderId": "folder-wtp-wtp-docs"
   },
   {
     "id": "1786711907110",
@@ -478,7 +514,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/Video+Controller.png",
     "icon": "ImageIcon",
     "iconColor": "orange-text",
-    "tagColor": "orange-tag"
+    "tagColor": "orange-tag",
+    "folderId": "folder-network-pictures"
   },
   {
     "id": "1786950560328",
@@ -491,7 +528,8 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/WTP_Diagram.png",
     "icon": "PenTool",
     "iconColor": "green-text",
-    "tagColor": "green-tag"
+    "tagColor": "green-tag",
+    "folderId": "folder-wtp-wtp-drawings"
   },
   {
     "id": "1786950639765",
@@ -504,6 +542,7 @@
     "url": "https://wafi-centre.s3.ap-south-1.amazonaws.com/WTP-Sensor-image2.png",
     "icon": "PenTool",
     "iconColor": "green-text",
-    "tagColor": "green-tag"
+    "tagColor": "green-tag",
+    "folderId": "folder-wtp-wtp-drawings"
   }
 ]

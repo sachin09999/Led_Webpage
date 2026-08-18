@@ -1,9 +1,12 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { MoreVertical, FileText, PlaySquare, PenTool, Image as ImageIcon, PieChart, LifeBuoy, Eye, Edit3, Trash2, Play } from 'lucide-react';
+import { MoreVertical, FileText, PlaySquare, PenTool, Image as ImageIcon, PieChart, LifeBuoy, Eye, Edit3, Trash2, Play, FolderInput } from 'lucide-react';
 import { deleteFile } from '@/actions/fileActions';
+import { getFolders } from '@/actions/folderActions';
 import { useRouter } from 'next/navigation';
+import EditMaterialModal from './EditMaterialModal';
+import MoveFileModal from './MoveFileModal';
 
 const iconMap = {
     FileText,
@@ -17,7 +20,15 @@ const iconMap = {
 export default function DataGrid({ files, onFileClick, onEdit, onDelete }) {
     const router = useRouter();
     const [openMenuId, setOpenMenuId] = useState(null);
+    const [editingFile, setEditingFile] = useState(null);
+    const [movingFile, setMovingFile] = useState(null);
+    const [availableFolders, setAvailableFolders] = useState([]);
     const menuRef = useRef(null);
+
+    // Fetch folders for moving files
+    useEffect(() => {
+        getFolders().then(setAvailableFolders).catch(console.error);
+    }, [movingFile]);
 
     // Close menu when clicking outside
     useEffect(() => {
@@ -31,11 +42,11 @@ export default function DataGrid({ files, onFileClick, onEdit, onDelete }) {
     }, []);
 
     if (!files || files.length === 0) {
-        return <p className="text-gray" style={{ padding: '16px 24px' }}>No items found.</p>;
+        return <p className="text-gray" style={{ padding: '16px 24px' }}>No items found in this folder.</p>;
     }
 
     const handleDeleteItem = async (file, e) => {
-        e.stopPropagation();
+        if (e) e.stopPropagation();
         setOpenMenuId(null);
         if (onDelete) {
             onDelete(file.id);
@@ -53,11 +64,19 @@ export default function DataGrid({ files, onFileClick, onEdit, onDelete }) {
     };
 
     const handleEditItem = (file, e) => {
-        e.stopPropagation();
+        if (e) e.stopPropagation();
         setOpenMenuId(null);
         if (onEdit) {
             onEdit(file);
+        } else {
+            setEditingFile(file);
         }
+    };
+
+    const handleMoveItem = (file, e) => {
+        if (e) e.stopPropagation();
+        setOpenMenuId(null);
+        setMovingFile(file);
     };
 
     return (
@@ -181,27 +200,45 @@ export default function DataGrid({ files, onFileClick, onEdit, onDelete }) {
                                                     <span>View Item</span>
                                                 </button>
 
-                                                {onEdit && (
-                                                    <button 
-                                                        onClick={(e) => handleEditItem(file, e)}
-                                                        style={{
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            gap: '8px',
-                                                            width: '100%',
-                                                            padding: '7px 10px',
-                                                            border: 'none',
-                                                            background: 'transparent',
-                                                            color: 'var(--text-main)',
-                                                            fontSize: '0.85rem',
-                                                            borderRadius: '6px',
-                                                            cursor: 'pointer'
-                                                        }}
-                                                    >
-                                                        <Edit3 size={14} />
-                                                        <span>Edit Item</span>
-                                                    </button>
-                                                )}
+                                                <button 
+                                                    onClick={(e) => handleEditItem(file, e)}
+                                                    style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '8px',
+                                                        width: '100%',
+                                                        padding: '7px 10px',
+                                                        border: 'none',
+                                                        background: 'transparent',
+                                                        color: 'var(--text-main)',
+                                                        fontSize: '0.85rem',
+                                                        borderRadius: '6px',
+                                                        cursor: 'pointer'
+                                                    }}
+                                                >
+                                                    <Edit3 size={14} />
+                                                    <span>Edit Item</span>
+                                                </button>
+
+                                                <button 
+                                                    onClick={(e) => handleMoveItem(file, e)}
+                                                    style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '8px',
+                                                        width: '100%',
+                                                        padding: '7px 10px',
+                                                        border: 'none',
+                                                        background: 'transparent',
+                                                        color: 'var(--text-main)',
+                                                        fontSize: '0.85rem',
+                                                        borderRadius: '6px',
+                                                        cursor: 'pointer'
+                                                    }}
+                                                >
+                                                    <FolderInput size={14} />
+                                                    <span>Move to Folder</span>
+                                                </button>
 
                                                 <button 
                                                     onClick={(e) => handleDeleteItem(file, e)}
@@ -231,6 +268,25 @@ export default function DataGrid({ files, onFileClick, onEdit, onDelete }) {
                     </div>
                 );
             })}
+
+            {/* Edit Material Modal Overlay */}
+            {editingFile && (
+                <EditMaterialModal 
+                    file={editingFile} 
+                    onClose={() => setEditingFile(null)} 
+                    onUpdated={() => router.refresh()} 
+                />
+            )}
+
+            {/* Move File Modal Overlay */}
+            {movingFile && (
+                <MoveFileModal 
+                    file={movingFile}
+                    folders={availableFolders}
+                    onClose={() => setMovingFile(null)}
+                    onMoved={() => router.refresh()}
+                />
+            )}
         </div>
     );
 }

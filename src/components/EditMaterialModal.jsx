@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { X, Save } from 'lucide-react';
+import { X, Save, Edit3 } from 'lucide-react';
 import { updateFile } from '@/actions/fileActions';
 import { useRouter } from 'next/navigation';
 
@@ -42,27 +42,44 @@ export default function EditMaterialModal({ file, onClose, onUpdated }) {
     };
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
+        <div className="viewer-overlay" onClick={onClose} style={{ zIndex: 1100 }}>
             <div 
-                className="modal-content" 
+                className="viewer-content shadow-card" 
                 onClick={e => e.stopPropagation()}
                 style={{
                     maxWidth: '520px',
                     width: '90%',
+                    height: 'auto',
                     padding: '24px',
                     borderRadius: '16px',
-                    background: 'var(--card-bg)',
-                    border: '1px solid var(--border-color)',
+                    background: 'var(--card-bg, #ffffff)',
+                    border: '1px solid var(--border-color, #e5e7eb)',
                     boxShadow: '0 20px 25px -5px rgba(0,0,0,0.3)'
                 }}
             >
+                {/* Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid var(--border-color)' }}>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 600 }}>Edit Item</h3>
-                    <button className="icon-btn" onClick={onClose} title="Close">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{ padding: '8px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
+                            <Edit3 size={20} />
+                        </div>
+                        <div>
+                            <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-main)' }}>Edit Item</h3>
+                            <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                Modify material details
+                            </p>
+                        </div>
+                    </div>
+                    <button 
+                        onClick={onClose} 
+                        style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-muted)', padding: '4px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        title="Close"
+                    >
                         <X size={20} />
                     </button>
                 </div>
 
+                {/* Form Body */}
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                         <label className="text-gray" style={{ fontSize: '0.85rem', fontWeight: 500 }}>Name / Title *</label>
@@ -72,6 +89,8 @@ export default function EditMaterialModal({ file, onClose, onUpdated }) {
                             value={formData.name} 
                             onChange={e => setFormData({ ...formData, name: e.target.value })} 
                             style={{ 
+                                width: '100%',
+                                boxSizing: 'border-box',
                                 padding: '10px 14px', 
                                 borderRadius: '8px', 
                                 border: '1px solid var(--border-color)', 
@@ -90,6 +109,8 @@ export default function EditMaterialModal({ file, onClose, onUpdated }) {
                             value={formData.url} 
                             onChange={e => setFormData({ ...formData, url: e.target.value })} 
                             style={{ 
+                                width: '100%',
+                                boxSizing: 'border-box',
                                 padding: '10px 14px', 
                                 borderRadius: '8px', 
                                 border: '1px solid var(--border-color)', 
@@ -101,7 +122,7 @@ export default function EditMaterialModal({ file, onClose, onUpdated }) {
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: 0 }}>
                             <label className="text-gray" style={{ fontSize: '0.85rem', fontWeight: 500 }}>Category</label>
                             <input 
                                 type="text"
@@ -109,6 +130,8 @@ export default function EditMaterialModal({ file, onClose, onUpdated }) {
                                 onChange={e => setFormData({ ...formData, category: e.target.value })} 
                                 placeholder="e.g. Videos, Docs..."
                                 style={{ 
+                                    width: '100%',
+                                    boxSizing: 'border-box',
                                     padding: '10px 14px', 
                                     borderRadius: '8px', 
                                     border: '1px solid var(--border-color)', 
@@ -119,12 +142,14 @@ export default function EditMaterialModal({ file, onClose, onUpdated }) {
                             />
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: 0 }}>
                             <label className="text-gray" style={{ fontSize: '0.85rem', fontWeight: 500 }}>Media Type</label>
                             <select 
                                 value={formData.type} 
                                 onChange={e => setFormData({ ...formData, type: e.target.value })} 
                                 style={{ 
+                                    width: '100%',
+                                    boxSizing: 'border-box',
                                     padding: '10px 14px', 
                                     borderRadius: '8px', 
                                     border: '1px solid var(--border-color)', 

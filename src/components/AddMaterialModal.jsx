@@ -12,10 +12,12 @@ export default function AddMaterialModal({
     defaultCategory = 'Docs',
     defaultDashboardSlug = 'ledwalldocs',
     lockDashboard = true,
-    dashboardsProp = []
+    lockCategory = false,
+    dashboardsProp = [],
+    currentFolderId = null
 }) {
     const router = useRouter();
-    const [mode, setMode] = useState('file'); // 'file' (MinIO upload) | 'link' (URL link)
+    const [mode, setMode] = useState('file'); // 'file' (upload) | 'link' (URL link)
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [statusMessage, setStatusMessage] = useState('');
     const [allDashboards, setAllDashboards] = useState(dashboardsProp);
@@ -26,7 +28,12 @@ export default function AddMaterialModal({
     const [selectedFile, setSelectedFile] = useState(null);
     const [dashboardSlug, setDashboardSlug] = useState(defaultDashboardSlug);
     const [category, setCategory] = useState(defaultCategory);
-    const [type, setType] = useState('document');
+    const [type, setType] = useState(() => {
+        const catLower = (defaultCategory || '').toLowerCase();
+        if (catLower.includes('video')) return 'video';
+        if (catLower.includes('picture') || catLower.includes('photo') || catLower.includes('image')) return 'image';
+        return 'document';
+    });
 
     // Fetch dashboards dynamically on mount or when opened
     useEffect(() => {
@@ -50,6 +57,43 @@ export default function AddMaterialModal({
     const categoryOptions = activeDashboard && activeDashboard.categories && activeDashboard.categories.length > 0
         ? activeDashboard.categories.map(c => c.name)
         : [defaultCategory];
+
+    // Dynamic upload guidance based on category & type
+    const getUploadGuidance = () => {
+        const catLower = (category || defaultCategory || '').toLowerCase();
+        const typeLower = (type || '').toLowerCase();
+
+        if (catLower.includes('video') || typeLower === 'video') {
+            return {
+                prompt: 'Click to select video',
+                accept: 'video/*'
+            };
+        }
+        if (catLower.includes('picture') || catLower.includes('photo') || catLower.includes('image') || typeLower === 'image') {
+            return {
+                prompt: 'Click to select image',
+                accept: 'image/*'
+            };
+        }
+        if (catLower.includes('drawing')) {
+            return {
+                prompt: 'Click to select drawing',
+                accept: '.pdf,.dwg,.dxf,.png,.jpg,.jpeg,.docx,.doc'
+            };
+        }
+        if (catLower.includes('finance') || catLower.includes('support')) {
+            return {
+                prompt: 'Click to select file',
+                accept: '.pdf,.xlsx,.xls,.csv,.docx,.doc,.zip'
+            };
+        }
+        return {
+            prompt: 'Click to select document',
+            accept: '.pdf,.docx,.doc,.xlsx,.xls,.txt,.pptx'
+        };
+    };
+
+    const uploadGuidance = getUploadGuidance();
 
     // Handle file selection
     const handleFileChange = (e) => {
@@ -106,7 +150,7 @@ export default function AddMaterialModal({
                     return;
                 }
 
-                setStatusMessage('Uploading file to MinIO S3 storage...');
+                setStatusMessage('Uploading file...');
                 const uploadData = new FormData();
                 uploadData.append('file', selectedFile);
 
@@ -129,6 +173,9 @@ export default function AddMaterialModal({
             formData.append('category', category);
             formData.append('type', type);
             formData.append('dashboardSlug', dashboardSlug);
+            if (currentFolderId) {
+                formData.append('folderId', currentFolderId);
+            }
             formData.append('size', fileSize);
 
             await addFile(formData);
@@ -141,7 +188,7 @@ export default function AddMaterialModal({
             console.error('Failed to add material:', err);
             setIsSubmitting(false);
             setStatusMessage('');
-            alert('Failed to process upload. Please check MinIO connection.');
+            alert('Failed to process upload. Please try again.');
         }
     };
 
@@ -203,7 +250,7 @@ export default function AddMaterialModal({
                         }}
                     >
                         <UploadCloud size={16} />
-                        <span>Upload File (MinIO)</span>
+                        <span>Upload File</span>
                     </button>
                     <button
                         type="button"
@@ -233,7 +280,7 @@ export default function AddMaterialModal({
                 {/* Form */}
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
-                    {/* Mode 1: MinIO File Upload Box */}
+                    {/* Mode 1: File Upload Box */}
                     {mode === 'file' && (
                         <div>
                             <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '6px' }}>
@@ -253,6 +300,7 @@ export default function AddMaterialModal({
                                 <input 
                                     type="file" 
                                     onChange={handleFileChange}
+                                    accept={uploadGuidance.accept}
                                     style={{
                                         position: 'absolute',
                                         inset: 0,
@@ -273,14 +321,9 @@ export default function AddMaterialModal({
                                             <span>{selectedFile.name} ({(selectedFile.size / (1024 * 1024)).toFixed(1)} MB)</span>
                                         </div>
                                     ) : (
-                                        <>
-                                            <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 500 }}>
-                                                Click to select video, PDF, or image
-                                            </p>
-                                            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                                                Supports MP4, WEBM, PDF, PNG, JPG, DOCX
-                                            </span>
-                                        </>
+                                        <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 500 }}>
+                                            {uploadGuidance.prompt}
+                                        </p>
                                     )}
                                 </div>
                             </div>
@@ -321,37 +364,48 @@ export default function AddMaterialModal({
                         />
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '6px' }}>
-                                Category
-                            </label>
-                            <select 
-                                value={category} 
-                                onChange={(e) => handleCategoryChange(e.target.value)}
-                                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--border-color, #d1d5db)', background: 'var(--bg-main, #f9fafb)', color: 'inherit' }}
-                            >
-                                {categoryOptions.map(cat => (
-                                    <option key={cat} value={cat}>{cat}</option>
-                                ))}
-                            </select>
-                        </div>
+                    {/* Category & Media Type (Only displayed if lockCategory is false) */}
+                    {!lockCategory && (
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                            <div>
+                                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '6px' }}>
+                                    Category
+                                </label>
+                                <select 
+                                    value={category} 
+                                    onChange={(e) => handleCategoryChange(e.target.value)}
+                                    style={{ 
+                                        width: '100%', 
+                                        padding: '10px 12px', 
+                                        borderRadius: '8px', 
+                                        border: '1px solid var(--border-color, #d1d5db)', 
+                                        background: 'var(--bg-main, #f9fafb)', 
+                                        color: 'inherit',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    {categoryOptions.map(cat => (
+                                        <option key={cat} value={cat}>{cat}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '6px' }}>
-                                Media Type
-                            </label>
-                            <select 
-                                value={type} 
-                                onChange={(e) => setType(e.target.value)}
-                                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--border-color, #d1d5db)', background: 'var(--bg-main, #f9fafb)', color: 'inherit' }}
-                            >
-                                <option value="document">📄 Document (PDF / Doc)</option>
-                                <option value="video">🎥 Video (MP4)</option>
-                                <option value="image">🖼️ Picture / Image</option>
-                            </select>
+                            <div>
+                                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: '6px' }}>
+                                    Media Type
+                                </label>
+                                <select 
+                                    value={type} 
+                                    onChange={(e) => setType(e.target.value)}
+                                    style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--border-color, #d1d5db)', background: 'var(--bg-main, #f9fafb)', color: 'inherit' }}
+                                >
+                                    <option value="document">📄 Document (PDF / Doc)</option>
+                                    <option value="video">🎥 Video (MP4)</option>
+                                    <option value="image">🖼️ Picture / Image</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     {/* Dashboard Location Selection */}
                     {!lockDashboard && (

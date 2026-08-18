@@ -48,6 +48,7 @@ export async function addFile(formData) {
     
     const category = formData.get('category');
     const dashboardSlug = formData.get('dashboardSlug') || 'wafi-command-centre';
+    const folderId = formData.get('folderId') || null;
     const { icon, iconColor, tagColor } = determineStyles(category);
 
     const newFile = {
@@ -55,6 +56,7 @@ export async function addFile(formData) {
         name: formData.get('name'),
         category: category,
         dashboardSlug: dashboardSlug,
+        folderId: folderId || null,
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
         size: formData.get('size') || '-',
         type: formData.get('type') || 'document',
@@ -77,6 +79,7 @@ export async function updateFile(id, formData) {
 
     const category = formData.get('category');
     const dashboardSlug = formData.get('dashboardSlug') || files[index].dashboardSlug || 'wafi-command-centre';
+    const folderId = formData.get('folderId') !== undefined ? formData.get('folderId') : files[index].folderId;
     const { icon, iconColor, tagColor } = determineStyles(category);
 
     files[index] = {
@@ -84,14 +87,25 @@ export async function updateFile(id, formData) {
         name: formData.get('name'),
         category: category,
         dashboardSlug: dashboardSlug,
-        size: formData.get('size'),
-        type: formData.get('type'),
-        url: formData.get('url'),
+        folderId: folderId || null,
+        size: formData.get('size') || files[index].size,
+        type: formData.get('type') || files[index].type,
+        url: formData.get('url') || files[index].url,
         icon,
         iconColor,
         tagColor
     };
 
+    await fs.writeFile(dataFilePath, JSON.stringify(files, null, 2));
+    revalidatePath('/', 'layout');
+}
+
+export async function moveFileToFolder(fileId, folderId) {
+    const files = await getFiles();
+    const index = files.findIndex(f => f.id === fileId);
+    if (index === -1) return;
+
+    files[index].folderId = folderId || null;
     await fs.writeFile(dataFilePath, JSON.stringify(files, null, 2));
     revalidatePath('/', 'layout');
 }

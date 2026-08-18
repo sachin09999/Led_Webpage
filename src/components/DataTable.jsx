@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { MoreVertical, FileText, PlaySquare, PenTool, Image as ImageIcon, PieChart, LifeBuoy, Eye, Edit3, Trash2 } from 'lucide-react';
+import { MoreVertical, FileText, PlaySquare, PenTool, Image as ImageIcon, PieChart, LifeBuoy, Eye, Edit3, Trash2, FolderInput } from 'lucide-react';
 import { deleteFile } from '@/actions/fileActions';
+import { getFolders } from '@/actions/folderActions';
 import { useRouter } from 'next/navigation';
 import EditMaterialModal from './EditMaterialModal';
+import MoveFileModal from './MoveFileModal';
 
 const iconMap = {
     FileText,
@@ -19,7 +21,14 @@ export default function DataTable({ files, onFileClick, onEdit, onDelete }) {
     const router = useRouter();
     const [openMenuId, setOpenMenuId] = useState(null);
     const [editingFile, setEditingFile] = useState(null);
+    const [movingFile, setMovingFile] = useState(null);
+    const [availableFolders, setAvailableFolders] = useState([]);
     const menuRef = useRef(null);
+
+    // Fetch folders for moving files
+    useEffect(() => {
+        getFolders().then(setAvailableFolders).catch(console.error);
+    }, [movingFile]);
 
     // Close menu when clicking outside
     useEffect(() => {
@@ -33,7 +42,7 @@ export default function DataTable({ files, onFileClick, onEdit, onDelete }) {
     }, []);
 
     if (!files || files.length === 0) {
-        return <p className="text-gray" style={{ padding: '16px 24px' }}>No files found.</p>;
+        return <p className="text-gray" style={{ padding: '16px 24px' }}>No files found in this folder.</p>;
     }
 
     const handleDeleteItem = async (file) => {
@@ -60,6 +69,11 @@ export default function DataTable({ files, onFileClick, onEdit, onDelete }) {
         } else {
             setEditingFile(file);
         }
+    };
+
+    const handleMoveItem = (file) => {
+        setOpenMenuId(null);
+        setMovingFile(file);
     };
 
     return (
@@ -189,6 +203,29 @@ export default function DataTable({ files, onFileClick, onEdit, onDelete }) {
                                                     </button>
 
                                                     <button 
+                                                        onClick={() => handleMoveItem(file)}
+                                                        style={{
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: '8px',
+                                                            width: '100%',
+                                                            padding: '8px 12px',
+                                                            border: 'none',
+                                                            background: 'transparent',
+                                                            color: 'var(--text-main)',
+                                                            fontSize: '0.85rem',
+                                                            borderRadius: '6px',
+                                                            cursor: 'pointer',
+                                                            textAlign: 'left'
+                                                        }}
+                                                        onMouseEnter={e => e.currentTarget.style.background = 'var(--border-color)'}
+                                                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                                                    >
+                                                        <FolderInput size={14} />
+                                                        <span>Move to Folder</span>
+                                                    </button>
+
+                                                    <button 
                                                         onClick={() => handleDeleteItem(file)}
                                                         style={{
                                                             display: 'flex',
@@ -227,6 +264,16 @@ export default function DataTable({ files, onFileClick, onEdit, onDelete }) {
                     file={editingFile} 
                     onClose={() => setEditingFile(null)} 
                     onUpdated={() => router.refresh()} 
+                />
+            )}
+
+            {/* Move File Modal Overlay */}
+            {movingFile && (
+                <MoveFileModal 
+                    file={movingFile}
+                    folders={availableFolders}
+                    onClose={() => setMovingFile(null)}
+                    onMoved={() => router.refresh()}
                 />
             )}
         </div>
