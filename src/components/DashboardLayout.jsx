@@ -9,7 +9,7 @@ import FileViewerModal from './FileViewerModal';
 export default function DashboardLayout({ children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isDark, setIsDark] = useState(false);
-    const { activeFile, setActiveFile } = useFileViewer();
+    const { activeFile, fileList, setActiveFile } = useFileViewer();
 
     useEffect(() => {
         if (isDark) {
@@ -42,7 +42,12 @@ export default function DashboardLayout({ children }) {
             </main>
 
             {activeFile && (
-                <FileViewerModal file={activeFile} onClose={() => setActiveFile(null)} />
+                <FileViewerModal 
+                    file={activeFile} 
+                    fileList={fileList}
+                    onClose={() => setActiveFile(null)} 
+                    onSelectFile={(f) => setActiveFile(f, fileList)}
+                />
             )}
         </div>
     );

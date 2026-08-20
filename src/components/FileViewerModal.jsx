@@ -1,8 +1,8 @@
 'use client';
-import { X, Maximize2, Minimize2, ZoomIn, ZoomOut, RotateCw, RotateCcw } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
+import { X, Maximize2, Minimize2, ZoomIn, ZoomOut, RotateCw, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
-export default function FileViewerModal({ file, onClose }) {
+export default function FileViewerModal({ file, fileList = [], onClose, onSelectFile }) {
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [zoomScale, setZoomScale] = useState(1);
     const [rotation, setRotation] = useState(0);
@@ -12,28 +12,53 @@ export default function FileViewerModal({ file, onClose }) {
     
     const containerRef = useRef(null);
 
+    const currentIndex = fileList.length > 0 
+        ? fileList.findIndex(f => (f.id && file.id && f.id === file.id) || (f.url && file.url && f.url === file.url))
+        : -1;
+    const hasMultipleFiles = fileList.length > 1 && currentIndex !== -1;
+
+    const handlePrevFile = useCallback((e) => {
+        if (e) e.stopPropagation();
+        if (!hasMultipleFiles || !onSelectFile) return;
+        const prevIndex = (currentIndex - 1 + fileList.length) % fileList.length;
+        onSelectFile(fileList[prevIndex]);
+    }, [hasMultipleFiles, currentIndex, fileList, onSelectFile]);
+
+    const handleNextFile = useCallback((e) => {
+        if (e) e.stopPropagation();
+        if (!hasMultipleFiles || !onSelectFile) return;
+        const nextIndex = (currentIndex + 1) % fileList.length;
+        onSelectFile(fileList[nextIndex]);
+    }, [hasMultipleFiles, currentIndex, fileList, onSelectFile]);
+
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         
-        const handleEsc = (e) => {
-            if (e.key === 'Escape' && !document.fullscreenElement) onClose();
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape' && !document.fullscreenElement) {
+                onClose();
+            } else if (e.key === 'ArrowLeft') {
+                handlePrevFile(e);
+            } else if (e.key === 'ArrowRight') {
+                handleNextFile(e);
+            }
         };
 
         const handleFullscreenChange = () => {
             setIsFullscreen(!!document.fullscreenElement);
         };
 
-        window.addEventListener('keydown', handleEsc);
+        window.addEventListener('keydown', handleKeyDown);
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
 
         return () => {
             document.body.style.overflow = '';
-            window.removeEventListener('keydown', handleEsc);
+            window.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('fullscreenchange', handleFullscreenChange);
             document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
         };
-    }, [onClose]);
+    }, [onClose, handlePrevFile, handleNextFile]);
 
     const [prevUrl, setPrevUrl] = useState(file?.url);
 
@@ -160,6 +185,19 @@ export default function FileViewerModal({ file, onClose }) {
                         <h3 style={{ margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontSize: '1rem' }}>
                             {file.name}
                         </h3>
+                        {hasMultipleFiles && (
+                            <span className="file-counter-badge" style={{
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                background: 'var(--bg-main, #f3f4f6)',
+                                color: 'var(--text-muted, #6b7280)',
+                                padding: '2px 8px',
+                                borderRadius: '12px',
+                                whiteSpace: 'nowrap'
+                            }}>
+                                {currentIndex + 1} of {fileList.length}
+                            </span>
+                        )}
                     </div>
 
                     {/* Image Zoom & Rotation Controls */}
@@ -275,6 +313,30 @@ export default function FileViewerModal({ file, onClose }) {
                         />
                     ) : (
                         <iframe src={iframeUrl} className="viewer-iframe" title={file.name} />
+                    )}
+
+                    {/* Mid-Left Overlay Previous Button */}
+                    {hasMultipleFiles && (
+                        <button
+                            type="button"
+                            className="viewer-nav-btn prev"
+                            onClick={handlePrevFile}
+                            title="Previous File (Left Arrow)"
+                        >
+                            <ChevronLeft size={28} />
+                        </button>
+                    )}
+
+                    {/* Mid-Right Overlay Next Button */}
+                    {hasMultipleFiles && (
+                        <button
+                            type="button"
+                            className="viewer-nav-btn next"
+                            onClick={handleNextFile}
+                            title="Next File (Right Arrow)"
+                        >
+                            <ChevronRight size={28} />
+                        </button>
                     )}
                 </div>
             </div>

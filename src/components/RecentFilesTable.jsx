@@ -232,9 +232,9 @@ export default function RecentFilesTable({
                         </button>
                     </div>
                 ) : viewMode === 'grid' ? (
-                    <DataGrid files={displayFiles} onFileClick={(file) => setActiveFile(file)} />
+                    <DataGrid files={displayFiles} onFileClick={(file) => setActiveFile(file, displayFiles)} />
                 ) : (
-                    <DataTable files={displayFiles} onFileClick={(file) => setActiveFile(file)} />
+                    <DataTable files={displayFiles} onFileClick={(file) => setActiveFile(file, displayFiles)} />
                 )
             )}
 
