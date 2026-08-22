@@ -43,6 +43,40 @@ const defaultDashboards = [
       { id: "pictures", name: "WTP Pictures", tag: "Images", icon: "ImageIcon", colorClass: "orange-icon", tagClass: "orange-tag", description: "Site photos, equipment imagery and references." },
       { id: "operations", name: "Operations Data", tag: "Records", icon: "Activity", colorClass: "blue-icon", tagClass: "blue-tag", description: "Daily logs, chemical usage and efficiency data." }
     ]
+  },
+  {
+    id: "1786707740068",
+    slug: "network",
+    name: "Network Server Rack1",
+    headerTitle: "Network",
+    description: "Network control system",
+    heroSubtitle: "Your entire network, in one view",
+    icon: "MonitorPlay",
+    bgClass: "",
+    bannerUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
+    categories: [
+      { id: "docs", name: "Docs", tag: "Files", description: "Documents and records for Docs." },
+      { id: "videos", name: "Videos", tag: "Files", description: "Documents and records for Videos." },
+      { id: "drawings", name: "Drawings", tag: "Files", description: "Documents and records for Drawings." },
+      { id: "pictures", name: "Pictures", tag: "Files", description: "Documents and records for Pictures." }
+    ]
+  },
+  {
+    id: "1786944641092",
+    slug: "network-server-rack-2",
+    name: "Network Server Rack 2",
+    headerTitle: "Network Server Rack 2",
+    description: "Network Server Rack 2 documents and media.",
+    heroSubtitle: "Network Server Rack 2 operational view",
+    icon: "MonitorPlay",
+    bgClass: "",
+    bannerUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
+    categories: [
+      { id: "docs", name: "Docs", tag: "Files", description: "Documents and records for Docs." },
+      { id: "videos", name: "Videos", tag: "Files", description: "Documents and records for Videos." },
+      { id: "drawings", name: "Drawings", tag: "Files", description: "Documents and records for Drawings." },
+      { id: "pictures", name: "Pictures", tag: "Files", description: "Documents and records for Pictures." }
+    ]
   }
 ];
 
