@@ -11,6 +11,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.750.0",
     "lucide-react": "^1.31.0",
+    "mammoth": "^1.12.1",
     "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
