@@ -7,14 +7,77 @@ import { uploadToMinIO } from '@/lib/minioClient';
 
 const dataFilePath = path.join(process.cwd(), 'data', 'store.json');
 
+async function syncMinioFilesToStore(files) {
+    try {
+        const minioDir = path.join(process.cwd(), 'minio-data', 'wafi-media');
+        const entries = await fs.readdir(minioDir).catch(() => []);
+        if (!entries || entries.length === 0) return files;
+
+        let hasNew = false;
+        for (const key of entries) {
+            if (!key || key.startsWith('.')) continue;
+            const isPresent = files.some(f => f.url && f.url.includes(key));
+            if (!isPresent) {
+                const parts = key.split('_');
+                const rawName = parts.length > 1 && !isNaN(parseInt(parts[0], 10)) ? parts.slice(1).join('_') : key;
+                const cleanName = rawName.replace(/_/g, ' ').trim() || key;
+                const ext = path.extname(key).toLowerCase();
+
+                let itemType = 'document';
+                let category = 'Docs';
+                let icon = 'FileText';
+                let iconColor = 'blue-text';
+                let tagColor = 'blue-tag';
+
+                if (['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'].includes(ext)) {
+                    itemType = 'image';
+                    category = 'Pictures';
+                    icon = 'ImageIcon';
+                    iconColor = 'orange-text';
+                    tagColor = 'orange-tag';
+                } else if (['.mp4', '.webm', '.mkv', '.mov'].includes(ext)) {
+                    itemType = 'video';
+                    category = 'Videos';
+                    icon = 'PlaySquare';
+                    iconColor = 'purple-text';
+                    tagColor = 'purple-tag';
+                }
+
+                files.push({
+                    id: Date.now().toString() + Math.random().toString(36).substring(2, 6),
+                    name: cleanName,
+                    category: category,
+                    dashboardSlug: 'network',
+                    folderId: null,
+                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+                    size: '-',
+                    type: itemType,
+                    url: `http://localhost:9005/wafi-media/${key}`,
+                    icon,
+                    iconColor,
+                    tagColor
+                });
+                hasNew = true;
+            }
+        }
+
+        if (hasNew) {
+            await fs.writeFile(dataFilePath, JSON.stringify(files, null, 2));
+        }
+    } catch (e) {
+        console.error("Failed auto-syncing MinIO files to store.json:", e);
+    }
+    return files;
+}
+
 export async function getFiles() {
+    let files = [];
     try {
         const fileContents = await fs.readFile(dataFilePath, 'utf8');
-        const files = JSON.parse(fileContents);
-        return files.sort((a, b) => a.name.localeCompare(b.name));
+        files = JSON.parse(fileContents);
     } catch (error) {
         console.log("Database not found, initializing fresh store...");
-        const defaultData = [
+        files = [
             { id: "1", name: "LED Wall Installation Manual v2.1.pdf", category: "Docs", dashboardSlug: "wafi-command-centre", date: "May 20, 2026", size: "4.8 MB", icon: "FileText", iconColor: "blue-text", tagColor: "blue-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
             { id: "2", name: "Insta 360° Installation Guide.mp4", category: "Videos", dashboardSlug: "wafi-command-centre", date: "May 18, 2026", size: "128.6 MB", icon: "PlaySquare", iconColor: "purple-text", tagColor: "purple-tag", type: "video", url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
             { id: "3", name: "Power Wiring Diagram.pdf", category: "Drawings", dashboardSlug: "wafi-command-centre", date: "May 17, 2026", size: "2.1 MB", icon: "PenTool", iconColor: "green-text", tagColor: "green-tag", type: "document", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
@@ -24,12 +87,14 @@ export async function getFiles() {
         ];
         try {
             await fs.mkdir(path.dirname(dataFilePath), { recursive: true });
-            await fs.writeFile(dataFilePath, JSON.stringify(defaultData, null, 2));
+            await fs.writeFile(dataFilePath, JSON.stringify(files, null, 2));
         } catch (e) {
             console.error("Failed to initialize store.json", e);
         }
-        return defaultData.sort((a, b) => a.name.localeCompare(b.name));
     }
+
+    files = await syncMinioFilesToStore(files);
+    return files.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function determineStyles(category) {
