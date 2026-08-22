@@ -7,22 +7,38 @@ import { uploadToMinIO } from '@/lib/minioClient';
 
 const dataFilePath = path.join(process.cwd(), 'data', 'store.json');
 
+function normalizeNameKey(name) {
+    if (!name) return '';
+    const withoutExt = name.replace(/\.[^/.]+$/, '');
+    return withoutExt
+        .toLowerCase()
+        .replace(/^[0-9]+_/, '')
+        .replace(/[-_\s]+/g, ' ')
+        .trim();
+}
+
 async function syncMinioFilesToStore(files) {
     try {
         const minioDir = path.join(process.cwd(), 'minio-data', 'wafi-media');
         const entries = await fs.readdir(minioDir).catch(() => []);
         if (!entries || entries.length === 0) return files;
 
+        const existingNames = new Set(files.map(f => normalizeNameKey(f.name)));
+
         let hasNew = false;
         for (const key of entries) {
             if (!key || key.startsWith('.')) continue;
-            const isPresent = files.some(f => f.url && f.url.includes(key));
-            if (!isPresent) {
-                const parts = key.split('_');
-                const rawName = parts.length > 1 && !isNaN(parseInt(parts[0], 10)) ? parts.slice(1).join('_') : key;
-                const cleanName = rawName.replace(/_/g, ' ').trim() || key;
-                const ext = path.extname(key).toLowerCase();
 
+            const parts = key.split('_');
+            const rawName = parts.length > 1 && !isNaN(parseInt(parts[0], 10)) ? parts.slice(1).join('_') : key;
+            const cleanName = rawName.replace(/_/g, ' ').trim() || key;
+            const normKey = normalizeNameKey(cleanName);
+
+            const isUrlPresent = files.some(f => f.url && f.url.includes(key));
+            const isNamePresent = existingNames.has(normKey);
+
+            if (!isUrlPresent && !isNamePresent) {
+                const ext = path.extname(key).toLowerCase();
                 let itemType = 'document';
                 let category = 'Docs';
                 let icon = 'FileText';
@@ -57,12 +73,24 @@ async function syncMinioFilesToStore(files) {
                     iconColor,
                     tagColor
                 });
+                existingNames.add(normKey);
                 hasNew = true;
             }
         }
 
-        if (hasNew) {
-            await fs.writeFile(dataFilePath, JSON.stringify(files, null, 2));
+        // Deduplicate files array by normalized name
+        const uniqueFilesMap = new Map();
+        for (const file of files) {
+            const norm = normalizeNameKey(file.name);
+            if (!uniqueFilesMap.has(norm) || (!uniqueFilesMap.get(norm).folderId && file.folderId)) {
+                uniqueFilesMap.set(norm, file);
+            }
+        }
+        const deduplicatedFiles = Array.from(uniqueFilesMap.values());
+
+        if (hasNew || deduplicatedFiles.length !== files.length) {
+            await fs.writeFile(dataFilePath, JSON.stringify(deduplicatedFiles, null, 2));
+            return deduplicatedFiles;
         }
     } catch (e) {
         console.error("Failed auto-syncing MinIO files to store.json:", e);
