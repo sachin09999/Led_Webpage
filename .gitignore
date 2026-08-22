@@ -34,3 +34,7 @@ yarn-error.log*
 
 # Local MinIO media storage (ignored to avoid GitHub 100MB file limit)
 minio-data/
+
+# Local database storage (ignored so server dashboards & uploads persist)
+data/
+
