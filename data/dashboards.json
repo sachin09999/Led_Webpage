@@ -10,12 +10,60 @@
     "bgClass": "",
     "bannerUrl": "",
     "categories": [
-      { "id": "docs", "name": "Docs", "tag": "Documents", "icon": "FileText", "colorClass": "blue-icon", "tagClass": "blue-tag", "description": "Installation manuals, safety guidelines and specifications." },
-      { "id": "videos", "name": "Videos", "tag": "Videos", "icon": "PlaySquare", "colorClass": "purple-icon", "tagClass": "purple-tag", "description": "Installation & maintenance tutorial videos." },
-      { "id": "drawings", "name": "Drawings", "tag": "Drawings", "icon": "PenTool", "colorClass": "green-icon", "tagClass": "green-tag", "description": "Power wiring diagrams, frame structural drawings." },
-      { "id": "pictures", "name": "Pictures", "tag": "Images", "icon": "ImageIcon", "colorClass": "orange-icon", "tagClass": "orange-tag", "description": "Site photos, equipment imagery and references." },
-      { "id": "finance", "name": "Finance Data", "tag": "Finance", "icon": "PieChart", "colorClass": "yellow-icon", "tagClass": "yellow-tag", "description": "Budgets, purchase history and financial records." },
-      { "id": "support", "name": "Support Data", "tag": "Support", "icon": "LifeBuoy", "colorClass": "blue-icon", "tagClass": "blue-tag", "description": "Global contacts list, support tickets and references." }
+      {
+        "id": "docs",
+        "name": "Docs",
+        "tag": "Documents",
+        "icon": "FileText",
+        "colorClass": "blue-icon",
+        "tagClass": "blue-tag",
+        "description": "Installation manuals, safety guidelines and specifications."
+      },
+      {
+        "id": "videos",
+        "name": "Videos",
+        "tag": "Videos",
+        "icon": "PlaySquare",
+        "colorClass": "purple-icon",
+        "tagClass": "purple-tag",
+        "description": "Installation & maintenance tutorial videos."
+      },
+      {
+        "id": "drawings",
+        "name": "Drawings",
+        "tag": "Drawings",
+        "icon": "PenTool",
+        "colorClass": "green-icon",
+        "tagClass": "green-tag",
+        "description": "Power wiring diagrams, frame structural drawings."
+      },
+      {
+        "id": "pictures",
+        "name": "Pictures",
+        "tag": "Images",
+        "icon": "ImageIcon",
+        "colorClass": "orange-icon",
+        "tagClass": "orange-tag",
+        "description": "Site photos, equipment imagery and references."
+      },
+      {
+        "id": "finance",
+        "name": "Finance Data",
+        "tag": "Finance",
+        "icon": "PieChart",
+        "colorClass": "yellow-icon",
+        "tagClass": "yellow-tag",
+        "description": "Budgets, purchase history and financial records."
+      },
+      {
+        "id": "support",
+        "name": "Support Data",
+        "tag": "Support",
+        "icon": "LifeBuoy",
+        "colorClass": "blue-icon",
+        "tagClass": "blue-tag",
+        "description": "Global contacts list, support tickets and references."
+      }
     ]
   },
   {
@@ -29,11 +77,51 @@
     "bgClass": "wtp-bg",
     "bannerUrl": "",
     "categories": [
-      { "id": "docs", "name": "WTP Docs", "tag": "Documents", "icon": "FileText", "colorClass": "blue-icon", "tagClass": "blue-tag", "description": "Plant manuals, safety guidelines and specifications." },
-      { "id": "videos", "name": "WTP Videos", "tag": "Videos", "icon": "PlaySquare", "colorClass": "purple-icon", "tagClass": "purple-tag", "description": "Plant operations and maintenance tutorial videos." },
-      { "id": "drawings", "name": "WTP Drawings", "tag": "Drawings", "icon": "PenTool", "colorClass": "green-icon", "tagClass": "green-tag", "description": "P&ID, plant layouts and structural drawings." },
-      { "id": "pictures", "name": "WTP Pictures", "tag": "Images", "icon": "ImageIcon", "colorClass": "orange-icon", "tagClass": "orange-tag", "description": "Site photos, equipment imagery and references." },
-      { "id": "operations", "name": "Operations Data", "tag": "Records", "icon": "Activity", "colorClass": "blue-icon", "tagClass": "blue-tag", "description": "Daily logs, chemical usage and efficiency data." }
+      {
+        "id": "docs",
+        "name": "WTP Docs",
+        "tag": "Documents",
+        "icon": "FileText",
+        "colorClass": "blue-icon",
+        "tagClass": "blue-tag",
+        "description": "Plant manuals, safety guidelines and specifications."
+      },
+      {
+        "id": "videos",
+        "name": "WTP Videos",
+        "tag": "Videos",
+        "icon": "PlaySquare",
+        "colorClass": "purple-icon",
+        "tagClass": "purple-tag",
+        "description": "Plant operations and maintenance tutorial videos."
+      },
+      {
+        "id": "drawings",
+        "name": "WTP Drawings",
+        "tag": "Drawings",
+        "icon": "PenTool",
+        "colorClass": "green-icon",
+        "tagClass": "green-tag",
+        "description": "P&ID, plant layouts and structural drawings."
+      },
+      {
+        "id": "pictures",
+        "name": "WTP Pictures",
+        "tag": "Images",
+        "icon": "ImageIcon",
+        "colorClass": "orange-icon",
+        "tagClass": "orange-tag",
+        "description": "Site photos, equipment imagery and references."
+      },
+      {
+        "id": "operations",
+        "name": "Operations Data",
+        "tag": "Records",
+        "icon": "Activity",
+        "colorClass": "blue-icon",
+        "tagClass": "blue-tag",
+        "description": "Daily logs, chemical usage and efficiency data."
+      }
     ]
   },
   {
@@ -47,10 +135,30 @@
     "bgClass": "",
     "bannerUrl": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
     "categories": [
-      { "id": "docs", "name": "Docs", "tag": "Files", "description": "Documents and records for Docs." },
-      { "id": "videos", "name": "Videos", "tag": "Files", "description": "Documents and records for Videos." },
-      { "id": "drawings", "name": "Drawings", "tag": "Files", "description": "Documents and records for Drawings." },
-      { "id": "pictures", "name": "Pictures", "tag": "Files", "description": "Documents and records for Pictures." }
+      {
+        "id": "docs",
+        "name": "Docs",
+        "tag": "Files",
+        "description": "Documents and records for Docs."
+      },
+      {
+        "id": "videos",
+        "name": "Videos",
+        "tag": "Files",
+        "description": "Documents and records for Videos."
+      },
+      {
+        "id": "drawings",
+        "name": "Drawings",
+        "tag": "Files",
+        "description": "Documents and records for Drawings."
+      },
+      {
+        "id": "pictures",
+        "name": "Pictures",
+        "tag": "Files",
+        "description": "Documents and records for Pictures."
+      }
     ]
   },
   {
@@ -64,78 +172,178 @@
     "bgClass": "",
     "bannerUrl": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
     "categories": [
-      { "id": "docs", "name": "Docs", "tag": "Files", "description": "Documents and records for Docs." },
-      { "id": "videos", "name": "Videos", "tag": "Files", "description": "Documents and records for Videos." },
-      { "id": "drawings", "name": "Drawings", "tag": "Files", "description": "Documents and records for Drawings." },
-      { "id": "pictures", "name": "Pictures", "tag": "Files", "description": "Documents and records for Pictures." }
+      {
+        "id": "docs",
+        "name": "Docs",
+        "tag": "Files",
+        "description": "Documents and records for Docs."
+      },
+      {
+        "id": "videos",
+        "name": "Videos",
+        "tag": "Files",
+        "description": "Documents and records for Videos."
+      },
+      {
+        "id": "drawings",
+        "name": "Drawings",
+        "tag": "Files",
+        "description": "Documents and records for Drawings."
+      },
+      {
+        "id": "pictures",
+        "name": "Pictures",
+        "tag": "Files",
+        "description": "Documents and records for Pictures."
+      }
     ]
   },
   {
     "id": "dimmer-docs",
     "slug": "dimmer-docs",
-    "name": "Dimmer Docs",
-    "headerTitle": "Dimmer Docs",
+    "name": "Leaders Dimmer Switch",
+    "headerTitle": "Leaders Dimmer Switch",
     "description": "Dimmer control system manuals, specifications, and drawings.",
     "heroSubtitle": "Dimmer control system documentation and media",
     "icon": "Sliders",
     "bgClass": "",
     "bannerUrl": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
     "categories": [
-      { "id": "docs", "name": "Docs", "tag": "Files", "description": "Documents and records for Docs." },
-      { "id": "videos", "name": "Videos", "tag": "Files", "description": "Documents and records for Videos." },
-      { "id": "drawings", "name": "Drawings", "tag": "Files", "description": "Documents and records for Drawings." },
-      { "id": "pictures", "name": "Pictures", "tag": "Files", "description": "Documents and records for Pictures." }
+      {
+        "id": "docs",
+        "name": "Docs",
+        "tag": "Files",
+        "description": "Documents and records for Docs."
+      },
+      {
+        "id": "videos",
+        "name": "Videos",
+        "tag": "Files",
+        "description": "Documents and records for Videos."
+      },
+      {
+        "id": "drawings",
+        "name": "Drawings",
+        "tag": "Files",
+        "description": "Documents and records for Drawings."
+      },
+      {
+        "id": "pictures",
+        "name": "Pictures",
+        "tag": "Files",
+        "description": "Documents and records for Pictures."
+      }
     ]
   },
   {
     "id": "leaders",
     "slug": "leaders",
-    "name": "Leaders",
-    "headerTitle": "Leaders",
+    "name": "Leaders Poster Dimmer",
+    "headerTitle": "Leaders Poster Dimmer",
     "description": "Leadership team documentation, media and operational records.",
     "heroSubtitle": "Leadership documentation and media",
     "icon": "Users",
     "bgClass": "",
     "bannerUrl": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
     "categories": [
-      { "id": "docs", "name": "Docs", "tag": "Files", "description": "Documents and records for Docs." },
-      { "id": "videos", "name": "Videos", "tag": "Files", "description": "Documents and records for Videos." },
-      { "id": "drawings", "name": "Drawings", "tag": "Files", "description": "Documents and records for Drawings." },
-      { "id": "pictures", "name": "Pictures", "tag": "Files", "description": "Documents and records for Pictures." }
+      {
+        "id": "docs",
+        "name": "Docs",
+        "tag": "Files",
+        "description": "Documents and records for Docs."
+      },
+      {
+        "id": "videos",
+        "name": "Videos",
+        "tag": "Files",
+        "description": "Documents and records for Videos."
+      },
+      {
+        "id": "drawings",
+        "name": "Drawings",
+        "tag": "Files",
+        "description": "Documents and records for Drawings."
+      },
+      {
+        "id": "pictures",
+        "name": "Pictures",
+        "tag": "Files",
+        "description": "Documents and records for Pictures."
+      }
     ]
   },
   {
     "id": "globe-wall",
     "slug": "globe-wall",
-    "name": "Globe Wall",
-    "headerTitle": "Globe Wall",
-    "description": "Globe Wall installation drawings, specs, videos and media.",
+    "name": "Globe Wall Dimmer",
+    "headerTitle": "Globe Wall Dimmer",
+    "description": "Globe Wall Dimmer installation drawings, specs, videos and media.",
     "heroSubtitle": "Globe Wall installation and control data",
     "icon": "Globe",
     "bgClass": "",
     "bannerUrl": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
     "categories": [
-      { "id": "docs", "name": "Docs", "tag": "Files", "description": "Documents and records for Docs." },
-      { "id": "videos", "name": "Videos", "tag": "Files", "description": "Documents and records for Videos." },
-      { "id": "drawings", "name": "Drawings", "tag": "Files", "description": "Documents and records for Drawings." },
-      { "id": "pictures", "name": "Pictures", "tag": "Files", "description": "Documents and records for Pictures." }
+      {
+        "id": "docs",
+        "name": "Docs",
+        "tag": "Files",
+        "description": "Documents and records for Docs."
+      },
+      {
+        "id": "videos",
+        "name": "Videos",
+        "tag": "Files",
+        "description": "Documents and records for Videos."
+      },
+      {
+        "id": "drawings",
+        "name": "Drawings",
+        "tag": "Files",
+        "description": "Documents and records for Drawings."
+      },
+      {
+        "id": "pictures",
+        "name": "Pictures",
+        "tag": "Files",
+        "description": "Documents and records for Pictures."
+      }
     ]
   },
   {
     "id": "entry-gate",
     "slug": "entry-gate",
-    "name": "Entry Gate",
-    "headerTitle": "Entry Gate",
+    "name": "Entry Gate Dimmer",
+    "headerTitle": "Entry Gate Dimmer",
     "description": "Entry gate systems, access control docs, drawings and media.",
     "heroSubtitle": "Entry gate operational specs and documentation",
     "icon": "DoorOpen",
     "bgClass": "",
     "bannerUrl": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
     "categories": [
-      { "id": "docs", "name": "Docs", "tag": "Files", "description": "Documents and records for Docs." },
-      { "id": "videos", "name": "Videos", "tag": "Files", "description": "Documents and records for Videos." },
-      { "id": "drawings", "name": "Drawings", "tag": "Files", "description": "Documents and records for Drawings." },
-      { "id": "pictures", "name": "Pictures", "tag": "Files", "description": "Documents and records for Pictures." }
+      {
+        "id": "docs",
+        "name": "Docs",
+        "tag": "Files",
+        "description": "Documents and records for Docs."
+      },
+      {
+        "id": "videos",
+        "name": "Videos",
+        "tag": "Files",
+        "description": "Documents and records for Videos."
+      },
+      {
+        "id": "drawings",
+        "name": "Drawings",
+        "tag": "Files",
+        "description": "Documents and records for Drawings."
+      },
+      {
+        "id": "pictures",
+        "name": "Pictures",
+        "tag": "Files",
+        "description": "Documents and records for Pictures."
+      }
     ]
   }
 ]
