@@ -77,6 +77,74 @@ const defaultDashboards = [
       { id: "drawings", name: "Drawings", tag: "Files", description: "Documents and records for Drawings." },
       { id: "pictures", name: "Pictures", tag: "Files", description: "Documents and records for Pictures." }
     ]
+  },
+  {
+    id: "dimmer-docs",
+    slug: "dimmer-docs",
+    name: "Dimmer Docs",
+    headerTitle: "Dimmer Docs",
+    description: "Dimmer control system manuals, specifications, and drawings.",
+    heroSubtitle: "Dimmer control system documentation and media",
+    icon: "Sliders",
+    bgClass: "",
+    bannerUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
+    categories: [
+      { id: "docs", name: "Docs", tag: "Files", description: "Documents and records for Docs." },
+      { id: "videos", name: "Videos", tag: "Files", description: "Documents and records for Videos." },
+      { id: "drawings", name: "Drawings", tag: "Files", description: "Documents and records for Drawings." },
+      { id: "pictures", name: "Pictures", tag: "Files", description: "Documents and records for Pictures." }
+    ]
+  },
+  {
+    id: "leaders",
+    slug: "leaders",
+    name: "Leaders",
+    headerTitle: "Leaders",
+    description: "Leadership team documentation, media and operational records.",
+    heroSubtitle: "Leadership documentation and media",
+    icon: "Users",
+    bgClass: "",
+    bannerUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
+    categories: [
+      { id: "docs", name: "Docs", tag: "Files", description: "Documents and records for Docs." },
+      { id: "videos", name: "Videos", tag: "Files", description: "Documents and records for Videos." },
+      { id: "drawings", name: "Drawings", tag: "Files", description: "Documents and records for Drawings." },
+      { id: "pictures", name: "Pictures", tag: "Files", description: "Documents and records for Pictures." }
+    ]
+  },
+  {
+    id: "globe-wall",
+    slug: "globe-wall",
+    name: "Globe Wall",
+    headerTitle: "Globe Wall",
+    description: "Globe Wall installation drawings, specs, videos and media.",
+    heroSubtitle: "Globe Wall installation and control data",
+    icon: "Globe",
+    bgClass: "",
+    bannerUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
+    categories: [
+      { id: "docs", name: "Docs", tag: "Files", description: "Documents and records for Docs." },
+      { id: "videos", name: "Videos", tag: "Files", description: "Documents and records for Videos." },
+      { id: "drawings", name: "Drawings", tag: "Files", description: "Documents and records for Drawings." },
+      { id: "pictures", name: "Pictures", tag: "Files", description: "Documents and records for Pictures." }
+    ]
+  },
+  {
+    id: "entry-gate",
+    slug: "entry-gate",
+    name: "Entry Gate",
+    headerTitle: "Entry Gate",
+    description: "Entry gate systems, access control docs, drawings and media.",
+    heroSubtitle: "Entry gate operational specs and documentation",
+    icon: "DoorOpen",
+    bgClass: "",
+    bannerUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80",
+    categories: [
+      { id: "docs", name: "Docs", tag: "Files", description: "Documents and records for Docs." },
+      { id: "videos", name: "Videos", tag: "Files", description: "Documents and records for Videos." },
+      { id: "drawings", name: "Drawings", tag: "Files", description: "Documents and records for Drawings." },
+      { id: "pictures", name: "Pictures", tag: "Files", description: "Documents and records for Pictures." }
+    ]
   }
 ];
 

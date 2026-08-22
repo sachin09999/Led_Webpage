@@ -2,7 +2,8 @@
 
 import { 
   MonitorPlay, Hexagon, FileText, PlaySquare, PenTool, Image as ImageIcon, 
-  PieChart, LifeBuoy, Activity, Layers, Settings, Home, ShieldCheck, Clock, File
+  PieChart, LifeBuoy, Activity, Layers, Settings, Home, ShieldCheck, Clock, File,
+  Sliders, Users, Globe, DoorOpen
 } from 'lucide-react';
 
 export const availableIcons = [
@@ -17,7 +18,11 @@ export const availableIcons = [
   'Activity',
   'Layers',
   'ShieldCheck',
-  'Clock'
+  'Clock',
+  'Sliders',
+  'Users',
+  'Globe',
+  'DoorOpen'
 ];
 
 const iconComponents = {
@@ -35,7 +40,11 @@ const iconComponents = {
   Home,
   ShieldCheck,
   Clock,
-  File
+  File,
+  Sliders,
+  Users,
+  Globe,
+  DoorOpen
 };
 
 export default function DynamicIcon({ name, size = 24, className = "" }) {

@@ -17,6 +17,19 @@ function normalizeNameKey(name) {
         .trim();
 }
 
+function inferDashboardSlug(cleanName) {
+    const lower = (cleanName || '').toLowerCase();
+    if (lower.includes('dimmer')) return 'dimmer-docs';
+    if (lower.includes('leader')) return 'leaders';
+    if (lower.includes('globe')) return 'globe-wall';
+    if (lower.includes('entry') || lower.includes('gate')) return 'entry-gate';
+    if (lower.includes('wtp') || lower.includes('water')) return 'wtp';
+    if (lower.includes('rack 2') || lower.includes('rack2')) return 'network-server-rack-2';
+    if (lower.includes('rack 1') || lower.includes('rack1') || lower.includes('network') || lower.includes('server') || lower.includes('switch') || lower.includes('router') || lower.includes('nvr') || lower.includes('firewall') || lower.includes('ap')) return 'network';
+    if (lower.includes('led') || lower.includes('wall')) return 'ledwalldocs';
+    return 'network';
+}
+
 async function syncMinioFilesToStore(files) {
     try {
         const minioDir = path.join(process.cwd(), 'minio-data', 'wafi-media');
@@ -59,11 +72,13 @@ async function syncMinioFilesToStore(files) {
                     tagColor = 'purple-tag';
                 }
 
+                const inferredSlug = inferDashboardSlug(cleanName);
+
                 files.push({
                     id: Date.now().toString() + Math.random().toString(36).substring(2, 6),
                     name: cleanName,
                     category: category,
-                    dashboardSlug: 'network',
+                    dashboardSlug: inferredSlug,
                     folderId: null,
                     date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
                     size: '-',
@@ -78,10 +93,17 @@ async function syncMinioFilesToStore(files) {
             }
         }
 
-        // Deduplicate files array by normalized name
+        // Deduplicate files array by normalized name and update dashboardSlug if generic
         const uniqueFilesMap = new Map();
         for (const file of files) {
             const norm = normalizeNameKey(file.name);
+            if (file.name && (!file.dashboardSlug || file.dashboardSlug === 'network')) {
+                const reInferred = inferDashboardSlug(file.name);
+                if (reInferred !== 'network') {
+                    file.dashboardSlug = reInferred;
+                    hasNew = true;
+                }
+            }
             if (!uniqueFilesMap.has(norm) || (!uniqueFilesMap.get(norm).folderId && file.folderId)) {
                 uniqueFilesMap.set(norm, file);
             }
